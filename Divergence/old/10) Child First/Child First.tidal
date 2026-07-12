@@ -1,0 +1,3 @@
+setbpm(100)
+d1 $ slowcat [note "c c ~ c c ~ c c ~ c c ~ c ~ c ~", note "c c ~ c c ~ c c ~ c [c c c c] [c c c c] c ~ c c"] # sound "EmuHiHat:0" # room 0.03 # size 0.2 # amp 0.8
+hush

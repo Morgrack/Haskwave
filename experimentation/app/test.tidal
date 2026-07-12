@@ -1,0 +1,7 @@
+setcps(80 / 60 / 4)
+
+
+jvbass = sound "jvbass" # distort 0.05 # room 0.4
+
+d1 $ slowcat [note "[c5*4]*2 [cs5*4]*2", note "[d5*4]*2 [ds5*4]*2", note "[b4*4]*2 [c*4]*2",note "[d5*4]*2 [ds5*4]*2"] # jvbass # amp "<0.2 0.45 0.5 0.5>*16"
+hush

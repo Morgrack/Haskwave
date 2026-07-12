@@ -1,0 +1,90 @@
+-- Divergence Lead 1 (distorted)
+-- Divergence Lead 2 (Legion lead synth)
+-- Divergence Lead 3 (star wars blaster effect)
+-- Pitch bend on 4th and 8th bar of main section
+
+
+
+-- UTILS
+bassPattern = slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"]
+notePattern1 = note "fs6 ~ e6 ~ g6 ~ e6 g6 fs6 fs6 g6 e6 g6 fs6 e6 ~"
+notePattern2 = note "fs6 ~ e6 ~ g6 ~ e6 g6 fs6 fs6 g6 e6 a6 e6 fs6 ~"
+notePattern3 = note "b5 ~ as5 ~ cs6 ~ as5 cs6 b5 b5 cs6 as5 cs6 b5 as5 ~"
+notePattern4 = note "b5 ~ as5 ~ cs6 ~ as5 cs6 b5 b5 cs6 as5 d6 as5 cs6 ~"
+duckingLR= amp "<0.04 0.36 0.4 0.4>*16"
+duckingM = amp "<0.05 0.45 0.5 0.5>*16"
+
+-- SYNTHS
+lead = sound "superzow" # sustain 0.2 # release 0.25 # resonance 0.8 # delay 0.7 # delaytime 0.33 # delayfeedback 0.8 # room 0.15 # size 0.8 # amp 0.15
+bassL = sound "supersaw" # voice 0.5 # lfo 14.0 # accelerate 0.0 # distort 0.23 # room 0.15 # size 0.8 # pan 0.15 # amp 0.4 # sustain 0.2 # release 0.14 -- take away 0.01 release when not ducked
+bassR = sound "supersaw" # voice 0.75 # lfo 14.0 # accelerate 0.015 # distort 0.23 # room 0.15 # size 0.8 # pan 0.85 # amp 0.4 # sustain 0.2 # release 0.14
+bassM = sound "supersaw" # voice 0.25 # lfo 7.0 # room 0.15 # size 0.95 # amp 0.5 # sustain 1.0 # release 0.16 # octave 4
+bass = stack [bassL, bassR, bassM]
+
+
+-- DRUMS
+snare = sound "EmuSnare:7" # crush (rand*1 + 5) # distort (rand*0.07 + 0.33) # room 0.03 # size 0.2 # amp 1.1 --consider ramping up distortion, but then making it decline quickly with each hit, should be able to do that with range repeated
+kick = sound "EmuKick:2" # room 0.01 # size 0.2 # amp 1.1
+cymbal = sound "EmuCymbals:1" # room 0.15 # size 0.8 # amp 0.7
+hihat = sound "EmuHiHat:0" # room 0.03 # size 0.2 # amp 0.4
+toms = sound "EmuToms:0" # room 0.03 # size 0.2 # amp 0.5
+
+
+
+-- SECTION A
+setcps (90/60/4)
+
+d2 $ slowcat [notePattern1, notePattern2] # lead # delay 0 --maybe on the final one, have it decelerate
+d5 $ note "b4 ~ b4 ~ ~ ~ b4 b4 b4 b4 b4 b4 b4 b4 ~ ~" # kick
+d6 $ note "~ ~ ~ ~ c ~ ~ ~ ~ ~ ~ ~ ~ ~ c ~" # snare
+d11 $ note "~ d d d" # cymbal
+
+d2 $ slowcat [notePattern1, notePattern2, notePattern1, notePattern1] # lead # delay 0
+d3 $ slowcat [notePattern1, notePattern2, notePattern1, notePattern1] # lead # delay 0 # amp 0.10 # octave 6
+
+hush
+setcps (90/60/2)
+d10 $ note "[[e5*8] [b4*8] [g4*8] [e4*8] ~ ~ ~ ~]" # toms --fix this
+
+
+
+-- SECTION B
+-- d1 $ vocals
+
+setcps (90/60/4)
+
+d2 $ bassPattern # bass
+d5 $ note "b4 b4 b4 b4" # kick # amp "1.0 0.5 1.0 0.5"
+d6 $ note "~ c ~ c " # snare
+
+d7 $ slowcat [note "d ~ ~ ~", note "~", note "~", note "~ ~ ~ ~ d"] # cymbal # speed "<1 1 1 -1>" # amp "0.7 0.35 0.35 0.35"
+--small hi hat
+
+d8 $ slowcat [note "~", note "~", note "~", note "[~ ~ ~ ~ ~ ~ ~ [c*8]]"] # hihat
+d9 $ slowcat [note "[[~ ~ ~ b5] [d6 ~ ~ cs6 ~ ~ b5 ~]]", note "[[~ ~ ~ b5] [d6 ~ ~ as5 ~ ~ cs6 ~]]", note "[[~ ~ ~ b5] [d6 ~ ~ cs6 ~ ~ b5 ~]]", note "[[~ ~ e6 ~ ~ ~ b5 ~] [d6 ~ ~ as5 ~ ~ cs6 ~]]"] # lead
+
+d8 $ slowcat [note "[[[~ c ~ c] [c c c c]]*2]", note "[[[~ c ~ c] [c c c c]]*2]", note "[[[~ [c c c ~] ~ c] [c c c c]] [[~ c ~ c] [c c c c]]]", note "~ c ~ c c ~ c c ~ c c c [c c c ~] c c c"] # hihat --improve this
+-- add counterpoint lead
+
+d8 $ slowcat [note "[c*4]*4", note "[[c*4] [c*4] [c*4] [[c c c ~] ~ [c c c ~] ~]]"] # hihat
+d11 $ slowcat [note "[[~ ~ ~ fs5] [fs5 ~ ~ g5 ~ ~ fs5 ~]]", note "[[~ e5 g5 e5] [fs5 ~ ~ g5 ~ ~ fs5 ~]]", note "[[~ g5 as5 g5]  [fs5 ~ ~ g5 ~ ~ fs5 ~]]", note "[[~ b5 g5 e5] [fs5 ~ ~ g5 ~ ~ fs5 ~]]"] # lead
+
+d11 silence
+
+-- SECTION C
+-- TODO see idea that I recorded for first half, then second half is counterpoint
+
+
+
+-- SECTION D
+d2 $ slowcat [notePattern3, notePattern4] # lead # amp 0.10
+d3 $ slowcat [notePattern1, notePattern2] # lead # amp 0.10
+d5 $ note "b4 ~ b4 ~ ~ ~ b4 b4 b4 b4 b4 b4 b4 b4 ~ ~" # kick
+d6 $ note "~ ~ ~ ~ c ~ ~ ~ ~ ~ ~ ~ ~ ~ c ~" # snare
+d11 $ note "~ ~ d d d d d d" # cymbal
+
+d2 $ slowcat [notePattern3, notePattern4, notePattern3, notePattern3] # lead # amp 0.10
+d3 $ slowcat [notePattern1, notePattern2, notePattern1, notePattern1] # lead # amp 0.10
+d4 $ slowcat [notePattern3, notePattern4, notePattern3, notePattern3] # lead # amp 0.10 # octave 6
+
+hush

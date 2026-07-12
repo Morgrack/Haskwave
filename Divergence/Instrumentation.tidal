@@ -1,0 +1,70 @@
+-- IMPORTS
+import qualified Sound.Osc.Fd as O
+import qualified Sound.Osc.Transport.Fd.Udp as O
+
+-- UTILS
+scUdp <- O.openUdp "127.0.0.1" 57120
+
+makeSideChain sourceOrbit controlOrbit slopeAbove clampTime relaxTime = do 
+    O.sendMessage scUdp (O.message "/makeSidechain" [O.int32 sourceOrbit, O.int32 controlOrbit, O.float slopeAbove, O.float clampTime, O.float relaxTime])
+
+clearSideChain sourceOrbit controlOrbit = do
+    O.sendMessage scUdp (O.message "/clearSidechain" [O.int32 sourceOrbit, O.int32 controlOrbit])
+
+chorus vBase vWidth pWidth sWidth aAmount p = stack [(p # voice (vBase + (vWidth / 2)) # pan (0.5 + (pWidth / 2)) # speed (1.0 + (sWidth / 2)) # amp aAmount), (p # voice (vBase - (vWidth / 2)) # pan (0.5 - (pWidth / 2)) # speed (1.0 - (sWidth / 2)) # amp aAmount)] 
+
+-- PROPHECY
+prophecy1 = chorus 0.9 0.1 1.0 0.0 0.7 (sound "supersaw" # sustain 0.25 # release 0.25 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 150)
+prophecy2 = chorus 0.9 0.1 1.0 0.0 0.6 (sound "supersaw" # attack 0.05 # release 999 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 120)
+prophecy3 = chorus 8.0 0.1 0.9 0.0 0.5 (sound "supersaw" # attack 0.05 # release 999 # lfo 0.25 # rate 0.01 # resonance 0.9 # distort 0.7 # bpf 50 # bpq 5 # hpf 200)
+prophecy4 = chorus 1.0 0.0 0.8 0.0 0.45 (sound "supernoise" # attack 0.05 # release 999 # resonance 0.2 # distort 0.25 # phasdp 0.7 # phasr 5.0 # hpf 150)
+prophecy5 = chorus 0.7 0.1 0.7 0.0 0.2 (sound "supersaw" # attack 0.05 # release 999 # lfo 7.0 # rate 0.005 # resonance 0.01 # hpf 100 # lpf 7000)
+prophecy6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 999 # lfo 1.0 # rate 0.001 # octave 4 # lpf 200
+prophecy = stack [prophecy1, prophecy2, prophecy3, prophecy4, prophecy5, prophecy6] # room 0.15 # size 0.9
+
+-- BASS
+bass1 = chorus 0.5 0.15 0.9 0.02 0.5 (sound "supersaw" # lfo 4.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85)
+bass2
+bass3
+bass = stack [bass1, bass2, bass3]
+
+-- DRUMS
+clap = sound "EmuPercussion:3" # amp 1.2 # room 0.03 # size 0.8
+cowbell = sound "EmuPercussion:7" # amp 0.8 # room 0.02 # size 0.8
+heartbeat = sound "EmuKick:9" # amp 1.0 # room 0.05 # size 0.8 # lpf 2500
+swipe = sound "EmuPercussion:8" # amp 1.0 # room 0.03 # size 0.8
+woodblock = sound "EmuPercussion:12" # amp 1.0 # room 0.01 # size 0.8
+agogoHigh = sound "EmuPercussion:0" # amp 0.8 # room 0.01 # size 0.8
+agogoLow = sound "EmuPercussion:1" # amp 0.8 # room 0.01 # size 0.8
+kickHeavy = sound "EmuKick:2" # amp 1.0 # room 0.005 # size 0.8
+kickLight = sound "EmuKick:5" # amp 1.3 # room 0.005 # size 0.8
+snareHeavy = sound "EmuSnare:7" # amp 0.4 # room 0.03 # size 0.9 # shape 0.8 # crush 7
+snareLight = sound "EmuSnare:6" # amp 0.5 # room 0.03 # size 0.8 # shape 0.8 # hpf 200
+cymbalChina = sound "EmuCymbals:0" # amp 0.3 # room 0.15 # size 0.8
+cymbalCrash = sound "OberheimCymbals:0" # amp 0.4 # room 0.15 # size 0.8
+cymbalRide = sound "OberheimCymbals:1" # amp 0.2 # room 0.15 # size 0.8
+hihatClosed = sound "EmuHiHat:0" # amp 0.3 # room 0.02 # size 0.8
+hihatPartial = sound "EmuHiHat:1" # amp 0.5 # room 0.03 # size 0.8
+hihatOpen = sound "EmuHiHat:2" # amp 0.5 # room 0.03 # size 0.8
+
+-- EXPERIMENTATION
+d1 $ note "c*4" # kickLight
+d2 $ note "~ c ~ c" # snareLight
+d1 $ note "c*4" # kickHeavy
+d2 $ note "~ cs ~ cs" # snareHeavy
+d3 $ note "c*16" # hihatClosed
+d4 $ slowcat ["c", "~"] # cymbalCrash
+setbpm(138)
+d1 $ slowcat [note "af2 af2 af2 bf2 ~ ~ ~ ~", note "~"] # legato "1 1 1 13 1 1 1 1 1" # prophecy
+setbpm(114)
+d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ df3 ~ ~" # legato "3 2 3 1", note "a2 ~ ~ a2 ~ ~ ~ ~" # legato "3 5 1", note "a2 ~ ~ a2 ~ c3 ~ ~" # legato "3 2 3 1"] # prophecy
+setcps(87 / 60 / 4)
+
+d4 $ slowcat [note "[d3*4]*2 [e3*4]*2", note "[f3*4]*2 [[g3*4] [a3*4]]", note "[bf3*4]*2 [a3*4]*2", note "[g3*4]*2 [[f3*4] [cs3*4]]"] # bass1
+d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass1
+d4 $ slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"] # bass1
+d4 $ slowcat [note "[b3*4]*2 [cs4*4]*2", note "[d4*4]*2 [[e4*4] [fs4*4]]", note "[g4*4]*2 [fs4*4]*2", note "[e4*4]*2 [[d4*4] [as3*4]]"] # bass1
+makeSideChain 3 0 0.4 0.005 0.02
+clearSideChain 3 0
+
+hush

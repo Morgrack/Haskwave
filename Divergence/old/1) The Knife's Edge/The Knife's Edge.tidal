@@ -1,0 +1,65 @@
+-- UTILS
+bassPattern = slowcat [note "[fs3*4]*2 [g3*4]*2", note "[gs3*4]*2 [a3*4]*2", note "[f3*4]*2 [fs3*4]*2", note "[gs3*4]*2 [a3*4]*2"]
+duckingLR= amp "<0.04 0.36 0.4 0.4>*16"
+duckingM = amp "<0.05 0.45 0.5 0.5>*16"
+duckingExceptLastLR = slowcat [duckingLR, duckingLR, duckingLR, duckingLR, duckingLR, duckingLR, duckingLR, amp "[0.04 0.36 0.4 0.4] [0.04 0.36 0.4 0.4] [0.04 0.36 0.4 0.4] [0.4*4]"]
+duckingExceptLastM = slowcat [duckingM, duckingM, duckingM, duckingM, duckingM, duckingM, duckingM, amp "[0.05 0.45 0.5 0.5] [0.05 0.45 0.5 0.5] [0.05 0.45 0.5 0.5] [0.5*4]"]
+filterSweep = cutoff (range 20 20000 $ (slow 8 saw) ** 3) --FIX THIS
+distortSweep = distort (range 0.0 0.23 $ (slow 8 saw) ** 3)
+
+--VOCALS
+vocals = sound "Vocals" # room 0.15 # size 0.8 # amp 0.5
+
+-- SYNTHS
+lead = sound "superzow" # resonance 0.8 # room 0.15 # size 0.8 # amp 0.15
+bass = sound "supersaw"
+bassL = bass # voice 0.5 # lfo 14.0 # accelerate 0.0 # distort 0.23 # room 0.15 # size 0.8 # pan 0.15 # amp 0.4 # sustain 0.2 # release 0.17
+bassR = bass # voice 0.75 # lfo 14.0 # accelerate 0.015 # distort 0.23 # room 0.15 # size 0.8 # pan 0.85 # amp 0.4 # sustain 0.2 # release 0.17
+bassM = bass # voice 0.25 # lfo 7.0 # room 0.15 # size 0.95 # amp 0.5 # sustain 1.0 # release 0.19
+
+-- DRUMS
+snare = sound "EmuSnare:7" # crush (rand*1 + 5) # distort (rand*0.07 + 0.33) # room 0.03 # size 0.2 # amp 1.2 --consider ramping up distortion, but then making it decline quickly with each hit, should be able to do that with range repeated
+kick = sound "EmuKick:2" # room 0.01 # size 0.2 # amp 1.1
+
+
+
+-- INTRO
+setcps(80/60/4)
+-- d1 knife sharpening
+-- d2 whispery vocals
+d3 $ bassPattern # bassL # duckingExceptLastLR # filterSweep # distortSweep 
+d4 $ bassPattern # bassR # duckingExceptLastLR # filterSweep # distortSweep
+d5 $ bassPattern # bassM # duckingExceptLastM # octave 4 # filterSweep
+d6 $ slowcat ((replicate 7("cs4*4")) ++ ["cs4 cs4 cs4 ~"]) # kick
+
+
+
+
+-- SECTION A
+d1 $ slowcat (["~ 0 ~ ~ ~ ~ ~ ~"] ++ (replicate 7 ("~"))) # vocals
+d2 $ slowcat [note "~", note "[[~ ~ ~ fs5] [a5 ~ ~ gs5 ~ ~ f5 ~]]" # legato 1, note "~", note "[[~ ~ ~ fs5] [a5 ~ ~ f5 ~ ~ gs5 ~]]" # legato 1] # lead
+d3 $ bassPattern # bassL # duckingExceptLastLR
+d4 $ bassPattern # bassR # duckingExceptLastLR
+d5 $ bassPattern # bassM # duckingExceptLastM # octave 4
+d6 $ slowcat ((replicate 7 ("cs4*4")) ++ ["cs4 cs4 cs4 ~"]) # kick
+
+
+
+-- SECTION C
+-- counterpoint
+
+
+
+-- SECTION D
+-- knife
+
+
+
+-- SECTION E
+--all together now
+
+
+
+-- OUTRO
+hush
+panic
