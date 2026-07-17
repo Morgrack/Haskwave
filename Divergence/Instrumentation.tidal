@@ -23,10 +23,11 @@ prophecy6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 999 
 prophecy = stack [prophecy1, prophecy2, prophecy3, prophecy4, prophecy5, prophecy6] # room 0.15 # size 0.9
 
 -- BASS
-bass1 = chorus 0.5 0.15 0.9 0.02 0.5 (sound "supersaw" # lfo 4.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85)
-bass2
-bass3
-bass = stack [bass1, bass2, bass3]
+bass1 
+bass2 = chorus 0.9 0.15 0.7 0.03 0.5 (sound "supersaw" # lfo 5.0 # sustain 0.2 # shape 0.3 # release 0.16 # room 0.2 # size 0.85 # hpf 150)
+bass3 = chorus 1.5 0.15 0.3 0.03 0.1 (sound "supersaw" # lfo 10.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85 # lpf 8000)
+bass4 = sound "supersaw" # voice 0.1 # amp 0.4 # lfo 1.0 # release 0.16 # room 0.2 # size 0.85 # octave 4 # lpf 150
+bass = stack [bass2, bass3, bass4]
 
 -- DRUMS
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.03 # size 0.8
@@ -58,12 +59,12 @@ setbpm(138)
 d1 $ slowcat [note "af2 af2 af2 bf2 ~ ~ ~ ~", note "~"] # legato "1 1 1 13 1 1 1 1 1" # prophecy
 setbpm(114)
 d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ df3 ~ ~" # legato "3 2 3 1", note "a2 ~ ~ a2 ~ ~ ~ ~" # legato "3 5 1", note "a2 ~ ~ a2 ~ c3 ~ ~" # legato "3 2 3 1"] # prophecy
-setcps(87 / 60 / 4)
 
-d4 $ slowcat [note "[d3*4]*2 [e3*4]*2", note "[f3*4]*2 [[g3*4] [a3*4]]", note "[bf3*4]*2 [a3*4]*2", note "[g3*4]*2 [[f3*4] [cs3*4]]"] # bass1
-d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass1
-d4 $ slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"] # bass1
-d4 $ slowcat [note "[b3*4]*2 [cs4*4]*2", note "[d4*4]*2 [[e4*4] [fs4*4]]", note "[g4*4]*2 [fs4*4]*2", note "[e4*4]*2 [[d4*4] [as3*4]]"] # bass1
+setbpm(87)
+d4 $ slowcat [note "[d3*4]*2 [e3*4]*2", note "[f3*4]*2 [[g3*4] [a3*4]]", note "[bf3*4]*2 [a3*4]*2", note "[g3*4]*2 [[f3*4] [cs3*4]]"] # bass
+d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
+d4 $ slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"] # bass
+d4 $ slowcat [note "[b3*4]*2 [cs4*4]*2", note "[d4*4]*2 [[e4*4] [fs4*4]]", note "[g4*4]*2 [fs4*4]*2", note "[e4*4]*2 [[d4*4] [as3*4]]"] # bass
 makeSideChain 3 0 0.4 0.005 0.02
 clearSideChain 3 0
 

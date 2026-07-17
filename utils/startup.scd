@@ -47,19 +47,19 @@ s.reboot { // server options are only updated on reboot
 		// ...
 
 		//LOAD SAMPLES
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/OST Audio - Free Synthwave Drums/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/E-muDrumulator/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/KorgDDD-1/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/LinnLinn9000/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/LinnLinnDrum/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/OberheimDMX/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandR8/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandTR-626/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandTR-707/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SCIDrumTraks/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SimmonsSDSV/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/YamahaRX5/*");
-		~dirt.loadSoundFiles("C:/Users/Morgan/Desktop/GitHub Projects/Haskwave/samples/Vocals/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/OST Audio - Free Synthwave Drums/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/E-muDrumulator/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/KorgDDD-1/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/LinnLinn9000/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/LinnLinnDrum/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/OberheimDMX/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandR8/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandTR-626/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/RolandTR-707/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SCIDrumTraks/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SimmonsSDSV/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/YamahaRX5/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Vocals/*");
 
 		//SIDECHAINING
 		(
