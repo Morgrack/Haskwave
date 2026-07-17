@@ -13,6 +13,8 @@ clearSideChain sourceOrbit controlOrbit = do
 
 chorus vBase vWidth pWidth sWidth aAmount p = stack [(p # voice (vBase + (vWidth / 2)) # pan (0.5 + (pWidth / 2)) # speed (1.0 + (sWidth / 2)) # amp aAmount), (p # voice (vBase - (vWidth / 2)) # pan (0.5 - (pWidth / 2)) # speed (1.0 - (sWidth / 2)) # amp aAmount)] 
 
+setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist, uses 4/4 time signature
+
 -- PROPHECY
 prophecy1 = chorus 0.9 0.1 1.0 0.0 0.7 (sound "supersaw" # sustain 0.25 # release 0.25 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 150)
 prophecy2 = chorus 0.9 0.1 1.0 0.0 0.6 (sound "supersaw" # attack 0.05 # release 999 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 120)
@@ -23,11 +25,10 @@ prophecy6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 999 
 prophecy = stack [prophecy1, prophecy2, prophecy3, prophecy4, prophecy5, prophecy6] # room 0.15 # size 0.9
 
 -- BASS
-bass1 
-bass2 = chorus 0.9 0.15 0.7 0.03 0.5 (sound "supersaw" # lfo 5.0 # sustain 0.2 # shape 0.3 # release 0.16 # room 0.2 # size 0.85 # hpf 150)
-bass3 = chorus 1.5 0.15 0.3 0.03 0.1 (sound "supersaw" # lfo 10.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85 # lpf 8000)
-bass4 = sound "supersaw" # voice 0.1 # amp 0.4 # lfo 1.0 # release 0.16 # room 0.2 # size 0.85 # octave 4 # lpf 150
-bass = stack [bass2, bass3, bass4]
+bass1 = chorus 0.9 0.15 0.7 0.03 0.5 (sound "supersaw" # lfo 5.0 # sustain 0.2 # shape 0.3 # release 0.16 # room 0.2 # size 0.85 # hpf 150)
+bass2 = chorus 1.5 0.15 0.3 0.03 0.1 (sound "supersaw" # lfo 10.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85 # lpf 8000)
+bass3 = sound "supersaw" # voice 0.1 # amp 0.4 # lfo 1.0 # release 0.16 # room 0.2 # size 0.85 # octave 4 # lpf 150
+bass = stack [bass1, bass2, bass3]
 
 -- DRUMS
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.03 # size 0.8
@@ -39,11 +40,11 @@ agogoHigh = sound "EmuPercussion:0" # amp 0.8 # room 0.01 # size 0.8
 agogoLow = sound "EmuPercussion:1" # amp 0.8 # room 0.01 # size 0.8
 kickHeavy = sound "EmuKick:2" # amp 1.0 # room 0.005 # size 0.8
 kickLight = sound "EmuKick:5" # amp 1.3 # room 0.005 # size 0.8
-snareHeavy = sound "EmuSnare:7" # amp 0.4 # room 0.03 # size 0.9 # shape 0.8 # crush 7
+snareHeavy = sound "EmuSnare:7" # amp 0.25 # room 0.06 # size 0.8 # shape 0.9 # crush 6.5
 snareLight = sound "EmuSnare:6" # amp 0.5 # room 0.03 # size 0.8 # shape 0.8 # hpf 200
-cymbalChina = sound "EmuCymbals:0" # amp 0.3 # room 0.15 # size 0.8
-cymbalCrash = sound "OberheimCymbals:0" # amp 0.4 # room 0.15 # size 0.8
-cymbalRide = sound "OberheimCymbals:1" # amp 0.2 # room 0.15 # size 0.8
+cymbalChina = sound "EmuCymbals:0" # amp 0.4 # room 0.15 # size 0.8
+cymbalCrash = sound "OberheimCymbals:0" # amp 0.5 # room 0.15 # size 0.8
+cymbalRide = sound "OberheimCymbals:1" # amp 0.3 # room 0.15 # size 0.8
 hihatClosed = sound "EmuHiHat:0" # amp 0.3 # room 0.02 # size 0.8
 hihatPartial = sound "EmuHiHat:1" # amp 0.5 # room 0.03 # size 0.8
 hihatOpen = sound "EmuHiHat:2" # amp 0.5 # room 0.03 # size 0.8
