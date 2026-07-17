@@ -25,10 +25,11 @@ prophecy6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 999 
 prophecy = stack [prophecy1, prophecy2, prophecy3, prophecy4, prophecy5, prophecy6] # room 0.15 # size 0.9
 
 -- BASS
-bass1 = chorus 0.9 0.15 0.7 0.03 0.5 (sound "supersaw" # lfo 5.0 # sustain 0.2 # shape 0.3 # release 0.16 # room 0.2 # size 0.85 # hpf 150)
-bass2 = chorus 1.5 0.15 0.3 0.03 0.1 (sound "supersaw" # lfo 10.0 # sustain 0.2 # release 0.16 # room 0.2 # size 0.85 # lpf 8000)
-bass3 = sound "supersaw" # voice 0.1 # amp 0.4 # lfo 1.0 # release 0.16 # room 0.2 # size 0.85 # octave 4 # lpf 150
-bass = stack [bass1, bass2, bass3]
+--bass1 = chorus 0.9 0.1 1.0 0.03 0.7 (sound "supersaw" # lfo 1.0 # sustain 0.2 # release 0.2 # rate 0.1 # resonance 0.3 # crush 2.9 # bpf 50 # bpq 25 # hpf 150)
+bass1 = chorus 0.8 0.1 0.7 0.02 0.3 (sound "supersaw" # sustain 0.2 # release 0.13 # lfo 15.0 # shape 0.7 # distort 0.2 # hpf 400)
+bass2 = chorus 1.1 0.1 0.6 0.03 0.5 (sound "supersaw" # attack 0.04 # sustain 0.2 # release 0.15 # lfo 9.0 # shape 0.3 # hpf 100)
+bass3 = sound "supersaw" # voice 0.1 # amp 0.6 # attack 0.04 # release 0.15 # lfo 1.0 # octave 4 # lpf 100
+bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.7
 
 -- DRUMS
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.03 # size 0.8
