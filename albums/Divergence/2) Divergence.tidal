@@ -1,0 +1,45 @@
+-- SECTION A
+setbpm(90)
+makeSideChain 4 0 0.9 0.02 0.04
+notePattern1 = note "bf2 ~ af2 ~ bf2 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" # legato "1 1 1 1 11 1 1 1 1 1 1 1 1 1 1 1"
+notePattern2 = note "bf5 ~ gs5 ~ b5 ~ gs5 b5 bf5 bf5 b5 gs5 b5 bf5 gs5 ~"
+notePattern3 = note "bf5 ~ gs5 ~ b5 ~ gs5 b5 bf5 bf5 b5 gs5 cs6 gs5 bf5 ~"
+d1 $ note "c ~ c ~ c c c c c c c c c c c ~" # kick
+d2 $ note "~ ~ ~ ~ c ~ ~ ~ ~ ~ ~ ~ ~ ~ c ~" # snare3
+d3 $ slowcat [note "[c c] [c ~] ~ ~" # pan "[0.9 0.1]*4", note "[c c] [c ~] ~ ~" # pan "[0.1 0.9]*4"] # cymbalCrash
+d4 $ slowcat [note "~ ~ [cs*6] [cs*6] [cs*6] [cs*6] [cs*6] ~"] # toms2C # gain (1 - rand * 0.07) -- jazz up this pattern
+d5 $ slowcat [notePattern1, notePattern1, notePattern1, notePattern1 # accelerate 0.05, notePattern1, notePattern1, notePattern1, notePattern1 # accelerate (-0.05)] # prophecy -- change this to "commandment" synth
+d6 $ slowcat [notePattern2, notePattern3, notePattern2, notePattern3, notePattern2, notePattern3, notePattern2, notePattern2] # sound "supersaw" -- change this to an actual synth
+d7 $ slowcat ["~", "~", "~", "~", notePattern2, notePattern3, notePattern2, notePattern2] # sound "supersaw" # octave 6 -- change this to an actual synth
+-- add unique SFX to each phrase
+hush
+
+-- BRIDGE
+setcps(90 /60 / 2)
+d4 $ note "cs*6 ~ ~ ~" # toms2A
+d5 $ note "~ cs*6 ~ ~" # toms2B
+d6 $ note "~ ~ cs*6 ~" # toms2C 
+d7 $ note "~ ~ ~ cs*6" # toms2D
+hush
+
+-- SECTION B
+setbpm(90)
+clearSideChain 4 0
+makeSideChain 3 0 0.4 0.003 0.02
+d1 $ note "c*4" # kick
+d2 $ note "~ c ~ c" # snare3
+d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1>" # gain "1.0 0.8 0.8 0.8"
+d4 $ slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"] # bass
+
+
+-- SECTION C
+
+-- SECTION D
+
+-- OUTRO
+setcps(90 /60 / 2)
+d4 $ note "cs*6 ~ ~ ~" # toms2A
+d5 $ note "~ cs*6 ~ ~" # toms2B
+d6 $ note "~ ~ cs*6 ~" # toms2C 
+d7 $ note "~ ~ ~ cs*6" # toms2D
+hush
