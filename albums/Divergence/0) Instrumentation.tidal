@@ -25,16 +25,16 @@ prophecy6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 999 
 prophecy = stack [prophecy1, prophecy2, prophecy3, prophecy4, prophecy5, prophecy6] # room 0.15 # size 0.9
 
 -- BASS
-bass1 = chorus 0.8 0.1 0.8 0.02 0.25 (sound "supersaw" # sustain 0.2 # release 0.13 # lfo 16.0 # resonance 0.3 # shape 0.7 # distort 0.3 # hpf 500)
-bass2 = chorus 1.1 0.1 0.6 0.03 0.5 (sound "supersaw" # attack 0.04 # sustain 0.2 # release 0.15 # lfo 10.0 # shape 0.5 # hpf 100)
+bass1 = chorus 0.8 0.1 0.8 0.02 0.15 (sound "supersaw" # sustain 0.2 # release 0.13 # lfo 16.0 # resonance 0.3 # shape 0.8 # distort 0.3 # hpf 500)
+bass2 = chorus 1.2 0.1 0.6 0.04 0.5 (sound "supersaw" # attack 0.04 # sustain 0.2 # release 0.15 # lfo 10.0 # resonance 0.25 # shape 0.4 # hpf 100)
 bass3 = sound "supersaw" # voice 0.1 # amp 0.7 # attack 0.04 # release 0.15 # lfo 1.0 # octave 4 # lpf 100
-bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.75
+bass = stack [bass1, bass2, bass3] # room 0.17 # size 0.8
 
 -- DRUMS
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.04 # size 0.8
 cowbell = sound "EmuPercussion:7" # amp 0.8 # room 0.02 # size 0.8
 heartbeat = sound "EmuKick:9" # amp 1.0 # room 0.05 # size 0.8 # lpf 2500
-kick = sound "EmuKick:2" # amp 1.4 # shape (-0.15) -- af
+kick = sound "EmuKick:2" # amp 1.2 # shape (-0.15) -- af
 slap = sound "EmuPercussion:9" # amp 1.0 # room 0.04 # size 0.8
 swipe = sound "EmuPercussion:8" # amp 1.1 # room 0.04 # size 0.8
 woodblock = sound "EmuPercussion:12" # amp 0.8 # room 0.01 # size 0.8
@@ -75,7 +75,7 @@ d7 $ slowcat ["~", "c c c c"] # cymbalRide
 d8 $ slowcat ["~ ~ [~ c ~ ~] c"] # clap
 
 -- EXPERIMENTATION 2
-setbpm(135)
+setbpm(120)
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare3
 d3 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ ~ ~", note "~ ~ [c ~] [~ ~]"] # toms2A
@@ -88,5 +88,14 @@ setbpm(138)
 d1 $ slowcat [note "af2 af2 af2 bf2 ~ ~ ~ ~", note "~"] # legato "1 1 1 13 1 1 1 1 1" # prophecy
 setbpm(114)
 d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ df3 ~ ~" # legato "3 2 3 1", note "a2 ~ ~ a2 ~ ~ ~ ~" # legato "3 5 1", note "a2 ~ ~ a2 ~ c3 ~ ~" # legato "3 2 3 1"] # prophecy
+
+-- EXPERIMENTATION 4
+setbpm(90)
+makeSideChain 3 0 0.4 0.003 0.02
+d1 $ note "c*4" # kick
+d2 $ note "~ c ~ c" # snare3
+d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1.02>" # gain "1.0 0.77 0.77 0.77"
+d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
+clearSideChain 3 0 
 
 hush

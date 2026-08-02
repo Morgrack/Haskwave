@@ -29,7 +29,7 @@ clearSideChain 4 0
 makeSideChain 3 0 0.4 0.003 0.02
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare4
-d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1>" # gain "1.0 0.8 0.8 0.8"
+d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1.02>" # gain "1.0 0.77 0.77 0.77"
 d4 $ slowcat [note "[b2*4]*2 [cs3*4]*2", note "[d3*4]*2 [[e3*4] [fs3*4]]", note "[g3*4]*2 [fs3*4]*2", note "[e3*4]*2 [[d3*4] [as2*4]]"] # bass
 
 
