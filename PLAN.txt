@@ -1,3 +1,12 @@
+RULES:
+- Same bass
+- Same drums (E-mu Drumulator)
+- Same vocals
+- Different leads
+- Different lyrics (never repeat lyrics)
+- Different SFX (minimum one per song)
+
+SCHEDULE:
 02Aug: COMPOSITION
 09Aug: The Knife's Edge
 16Aug:

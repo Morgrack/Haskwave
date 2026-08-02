@@ -34,37 +34,41 @@ bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.75
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.04 # size 0.8
 cowbell = sound "EmuPercussion:7" # amp 0.8 # room 0.02 # size 0.8
 heartbeat = sound "EmuKick:9" # amp 1.0 # room 0.05 # size 0.8 # lpf 2500
-kick = sound "EmuKick:2" # amp 1.0 # room 0.01 # size 0.5 # shape 0.2 -- af
+kick = sound "EmuKick:2" # amp 1.4 # shape (-0.15) -- af
 slap = sound "EmuPercussion:9" # amp 1.0 # room 0.04 # size 0.8
 swipe = sound "EmuPercussion:8" # amp 1.1 # room 0.04 # size 0.8
 woodblock = sound "EmuPercussion:12" # amp 0.8 # room 0.01 # size 0.8
 agogoHigh = sound "EmuPercussion:0" # amp 0.7 # room 0.1 # size 0.7 # distort 0.7 # hpf 250
 agogoLow = sound "EmuPercussion:1" # amp 0.6 # room 0.1 # size 0.7 # distort 0.7
 cymbalChina = sound "EmuCymbals:0" # amp 0.4 # room 0.15 # size 0.8
-cymbalCrash = sound "OberheimCymbals:0" # amp 0.8 # room 0.15 # size 0.8 # speed 0.98
+cymbalCrash = sound "OberheimCymbals:0" # amp 0.9 # room 0.15 # size 0.8 # speed 0.98
 cymbalRide = sound "OberheimCymbals:1" # amp 0.4 # room 0.15 # size 0.8
 hihatClosed = sound "EmuHiHat:0" # amp 0.4 # room 0.03 # size 0.8
 hihatPartial = sound "EmuHiHat:1" # amp 0.6 # room 0.03 # size 0.8
 hihatOpen = sound "EmuHiHat:2" # amp 0.6 # room 0.03 # size 0.8
-snare1 = sound "EmuSnare:3" # amp 0.6 # room 0.15 # size 0.7 # shape 0.7 # crush 7.0 # speed 1.01 # hpf 250
-snare2 = sound "EmuSnare:6" # amp 0.8 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
-snare3 = sound "EmuSnare:7" # amp 0.3 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
-snare4 = sound "EmuSnare:9" # amp 1.0 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
-toms1A = sound "EmuToms:3" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- TODO
-toms1B = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- TODO
-toms1C = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- TODO
-toms1D = sound "EmuToms:5" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- TODO
+toms1A = sound "EmuToms:3" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
+toms1B = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
+toms1C = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
+toms1D = sound "EmuToms:5" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
 toms2A = sound "EmuToms:6" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # speed (2 ** (2 / 12)) # pan 0.35 -- f
 toms2B = sound "EmuToms:7" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # speed (2 ** (3 / 12)) # pan 0.45 -- cs
 toms2C = sound "EmuToms:7" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # pan 0.55 -- af
 toms2D = sound "EmuToms:8" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # pan 0.65 -- f
+snare1 = sound "EmuSnare:3" # amp 0.6 # room 0.15 # size 0.7 # shape 0.7 # crush 7.5 # speed 1.02 # hpf 250
+snare2 = sound "EmuSnare:5" # amp 0.8 # room 0.04 # size 0.8 # shape 0.6 # hpf 200
+snare3 = sound "EmuSnare:6" # amp 0.8 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
+snare4 = sound "EmuSnare:7" # amp 0.3 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
+snare5 = sound "EmuSnare:9" # amp 1.0 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
+
+-- VOCALS
+vocals = sound "Vocals" # room 0.15 # size 0.8 # amp 0.5
 
 -- EXPERIMENTATION 1
 setbpm(120)
 d1 $ slowcat ["c ~ ~ c c ~ c ~ ~ ~ c ~ c ~ ~ ~"] # kick
-d2 $ note "~ c ~ c" # snare2
-d3 $ slowcat ["c ~ ~ c ~ ~ c ~ ~ c ~ ~ ~ ~ ~ ~", "c ~ ~ c ~ ~ c ~ ~ c ~ ~ [c c] [c c] [c c] [c c]"] # hihatClosed
-d4 $ slowcat ["~ c ~ ~ c ~ ~ c ~ ~ c ~ ~ ~ ~ ~", "~ c ~ ~ c ~ ~ c ~ ~ c ~ ~ ~ ~ ~"] # hihatPartial
+d2 $ note "~ c ~ c" # snare3
+d3 $ slowcat ["~", "~ ~ ~ [c*8]"] # hihatClosed
+d4 $ note "c c ~ c c ~ c c ~ c c ~ ~ ~ ~ ~" # hihatPartial
 d5 $ slowcat ["~ ~ ~ c", "~"] # hihatOpen
 d6 $ slowcat ["c", "~"] # cymbalCrash
 d7 $ slowcat ["~", "c c c c"] # cymbalRide
@@ -73,7 +77,7 @@ d8 $ slowcat ["~ ~ [~ c ~ ~] c"] # clap
 -- EXPERIMENTATION 2
 setbpm(135)
 d1 $ note "c*4" # kick
-d2 $ note "~ c ~ c" # snare4
+d2 $ note "~ c ~ c" # snare3
 d3 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ ~ ~", note "~ ~ [c ~] [~ ~]"] # toms2A
 d4 $ slowcat ["~", "~", note "c ~ ~ ~ ~ ~ ~ ~", note "~ c [~ c] [~ ~]"] # toms2B
 d5 $ slowcat ["~", "~", note "~ ~ ~ c ~ ~ ~ ~", note "~ ~ [~ ~] [c ~]"] # toms2C

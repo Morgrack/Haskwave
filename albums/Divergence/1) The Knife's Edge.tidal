@@ -1,9 +1,25 @@
 -- INTRO
+setbpm(80)
+-- add knife sharpening samples getting progressively more distorted
+makeSideChain 1 0 0.4 0.01 0.03
+filterSweep = djf $ range 0 0.5 $ (slow 8 saw)
+d1 $ slowcat ((replicate 7 ("c*4")) ++ ["c c c ~"]) # kick
+d2 $ slowcat [note "[fs3*4]*2 [g3*4]*2", note "[gs3*4]*2 [a3*4]*2", note "[f3*4]*2 [fs3*4]*2", note "[gs3*4]*2 [a3*4]*2"] # bass # filterSweep
+hush
 
 -- SECTION A
+d1 $ slowcat ((replicate 7 ("c*4")) ++ ["c c c ~"]) # kick
+d2 $ slowcat [note "[fs3*4]*2 [g3*4]*2", note "[gs3*4]*2 [a3*4]*2", note "[f3*4]*2 [fs3*4]*2", note "[gs3*4]*2 [a3*4]*2"] # bass
+d3 $ slowcat [note "~", note "[~ ~ ~ ~ ~ ~ fs5 ~ a5 ~ ~ gs5 ~ ~ f5 ~]" # legato "1 2 3 3 25", note "~", note "[~ ~ ~ ~ ~ ~ fs5 ~ a5 ~ ~ f5 ~ ~ gs5 ~]" # legato "1 2 3 3 25"] # sound "supersaw"
+d4 $ slowcat (["~ 0 ~ ~ ~ ~ ~ ~"] ++ (replicate 7 ("~"))) # vocals
+hush
 
 -- SECTION B
 
 -- SECTION C
 
 -- SECTION D
+
+-- OUTRO
+
+hush
