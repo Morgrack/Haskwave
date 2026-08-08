@@ -40,7 +40,7 @@ makeSideChain 3 0 0.9 0.02 0.04
 d1 $ slowcat [note "[c*4] [c*4] c c", note "[c*4] [c*4] c c", note "[c*4] [c*4] c c", note "[c*4] c [c*4] c"] # kick
 d2 $ slowcat [note "~ ~ ~ c", note "~ ~ ~ c", note "~ ~ ~ c", note "~ c ~ c"] # snare4
 d3 $ slowcat [note "~ ~ [d3*4] [d3*4]", note "~ ~ [cs3*4] [cs3*4]", note "~ ~ [d3*4] [d3*4]", note "~ [d3*4] ~ [c3*4]"] # bass
-d4 $ slowcat [note "b2 ~", note "b2 ~", note "b2 ~", note "b2 ~ b2 ~"] # prophecy
+d4 $ slowcat [note "b2 ~", note "b2 ~", note "b2 ~", note "b2 ~ b2 ~"] # prophecy --add second note hpf descending
 d5 $ slowcat [note "~ ~ [b6 fs6 b5 b6] [fs6 b5 b6 fs6]", note "~ ~ [b6 g6 b5 b6] [g6 b5 b6 g6]", note "~ ~ [b6 fs6 b5 b6] [fs6 b5 b6 fs6]", note "~ [b6 fs6 cs6 as5] ~ [e7 c7 fs6 b5]"] # sound "supersaw" # octave 4 -- change this custom synth 2
 d6 $ note "c*16" # hihatClosed
 
@@ -53,4 +53,5 @@ d4 $ note "cs*6 ~ ~ ~" # toms2A
 d5 $ note "~ cs*6 ~ ~" # toms2B
 d6 $ note "~ ~ cs*6 ~" # toms2C 
 d7 $ note "~ ~ ~ cs*6" # toms2D
+--cymbal hit
 hush

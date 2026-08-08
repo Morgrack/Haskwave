@@ -46,10 +46,11 @@ cymbalRide = sound "OberheimCymbals:1" # amp 0.4 # room 0.15 # size 0.8
 hihatClosed = sound "EmuHiHat:0" # amp 0.4 # room 0.03 # size 0.8
 hihatPartial = sound "EmuHiHat:1" # amp 0.6 # room 0.03 # size 0.8
 hihatOpen = sound "EmuHiHat:2" # amp 0.6 # room 0.03 # size 0.8
-toms1A = sound "EmuToms:3" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
-toms1B = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
-toms1C = sound "EmuToms:4" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
-toms1D = sound "EmuToms:5" # amp 1.0 # room 0.2 # size 0.8 # shape 0.2 # hpf 200 -- tune this
+toms1 = amp 0.5 # room 0.1 # size 0.8 # shape 0.3 # hpf 250
+toms1A = stack [sound "EmuToms:3" # toms1 # speed (2 ** (2 / 12)) # pan 0 # nudge 0.025, sound "EmuToms:3" # toms1 # speed (2 ** (2 / 12)) # pan 1]
+toms1B = stack [sound "EmuToms:4" # toms1 # speed (2 ** (3 / 12)) # pan 0 # nudge 0.025, sound "EmuToms:4" # toms1 # speed (2 ** (3 / 12)) # pan 1]
+toms1C = stack [sound "EmuToms:4" # toms1 # pan 0 # nudge 0.025, sound "EmuToms:4" # toms1 # pan 1]
+toms1D = stack [sound "EmuToms:5" # toms1 # pan 0 # nudge 0.025, sound "EmuToms:5" # toms1 # pan 1]
 toms2A = sound "EmuToms:6" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # speed (2 ** (2 / 12)) # pan 0.35 -- f
 toms2B = sound "EmuToms:7" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # speed (2 ** (3 / 12)) # pan 0.45 -- cs
 toms2C = sound "EmuToms:7" # amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 300 # pan 0.55 -- af
@@ -75,13 +76,13 @@ d7 $ slowcat ["~", "c c c c"] # cymbalRide
 d8 $ slowcat ["~ ~ [~ c ~ ~] c"] # clap
 
 -- EXPERIMENTATION 2
-setbpm(120)
+setbpm(140)
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare3
-d3 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ ~ ~", note "~ ~ [c ~] [~ ~]"] # toms2A
-d4 $ slowcat ["~", "~", note "c ~ ~ ~ ~ ~ ~ ~", note "~ c [~ c] [~ ~]"] # toms2B
-d5 $ slowcat ["~", "~", note "~ ~ ~ c ~ ~ ~ ~", note "~ ~ [~ ~] [c ~]"] # toms2C
-d6 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ c ~", note "~ ~ [~ ~] [~ c]"] # toms2D
+d3 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ ~ ~", note "~ ~ [c ~] [~ ~]"] # toms1A
+d4 $ slowcat ["~", "~", note "c ~ ~ ~ ~ ~ ~ ~", note "~ c [~ c] [~ ~]"] # toms1B
+d5 $ slowcat ["~", "~", note "~ ~ ~ c ~ ~ ~ ~", note "~ ~ [~ ~] [c ~]"] # toms1C
+d6 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ c ~", note "~ ~ [~ ~] [~ c]"] # toms1D
 
 -- EXPERIMENTATION 3
 setbpm(138)
@@ -91,11 +92,12 @@ d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ d
 
 -- EXPERIMENTATION 4
 setbpm(90)
-makeSideChain 3 0 0.4 0.003 0.02
+makeSideChain 3 0 0.5 0.003 0.02
 d1 $ note "c*4" # kick
-d2 $ note "~ c ~ c" # snare3
-d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1.02>" # gain "1.0 0.77 0.77 0.77"
+d2 $ note "~ c ~ c" # snare4
+d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1.02>" # gain "1.0 0.75 0.75 0.75"
 d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
+d5 $ note "c*16" # hihatClosed
 clearSideChain 3 0 
 
 hush
