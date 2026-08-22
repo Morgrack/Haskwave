@@ -59,6 +59,7 @@ s.reboot { // server options are only updated on reboot
 		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SCIDrumTraks/*");
 		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/SimmonsSDSV/*");
 		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Synthwave Dojo 80s Drum Machines/YamahaRX5/*");
+		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Metallic/*");
 		~dirt.loadSoundFiles("D:/Programming/GitHub Projects/Haskwave/samples/Vocals/*");
 
 		//SIDECHAINING
@@ -103,6 +104,18 @@ s.reboot { // server options are only updated on reboot
 				};
 			};
 
+			~clearAllSidechains = {
+				var orbits, sourceOrbit, controlOrbit;
+				~sidechains.keysDo { |key|
+					orbits = key.split($,);
+					sourceOrbit = orbits[0].asInteger;
+					controlOrbit = orbits[1].asInteger;
+					~clearSidechain.(sourceOrbit, controlOrbit)
+				};
+				~sidechains.clear;
+				("Cleared all sidechains").postln;
+			};
+
 			OSCdef(\makeSidechain, { |msg|
 				var sourceOrbit = msg[1];
 				var controlOrbit = msg[2];
@@ -117,6 +130,10 @@ s.reboot { // server options are only updated on reboot
 				var controlOrbit = msg[2];
 				~clearSidechain.(sourceOrbit, controlOrbit);
 			}, '/clearSidechain');
+
+			OSCdef(\clearAllSidechains, { |msg|
+				~clearAllSidechains.();
+			}, '/clearAllSidechains');
 
 		)
 
