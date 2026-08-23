@@ -12,7 +12,7 @@ clearSideChain sourceOrbit controlOrbit = do
     O.sendMessage scUdp (O.message "/clearSidechain" [O.int32 sourceOrbit, O.int32 controlOrbit])
 
 clearAllSideChains = do
-    O.sendMessage scUdp (O.message "/clearAllSidechains" [])
+    O.sendMessage scUdp (O.message "/clearAllSidechains" []) --TODO: fix this
 
 chorus vBase vWidth pWidth sWidth aAmount p = stack [(p # voice (vBase + (vWidth / 2)) # pan (0.5 + (pWidth / 2)) # speed (1.0 + (sWidth / 2)) # amp aAmount), (p # voice (vBase - (vWidth / 2)) # pan (0.5 - (pWidth / 2)) # speed (1.0 - (sWidth / 2)) # amp aAmount)] 
 
@@ -41,7 +41,7 @@ bass = stack [bass1, bass2, bass3] # room 0.17 # size 0.8
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.04 # size 0.8
 cowbell = sound "EmuPercussion:7" # amp 0.8 # room 0.02 # size 0.8
 heartbeat = sound "EmuKick:9" # amp 1.0 # room 0.05 # size 0.8 # lpf 2500
-kick = sound "EmuKick:2" # amp 1.3 # shape (-0.15) -- af
+kick = sound "EmuKick:2" # amp 1.25 # shape (-0.15) -- af
 slap = sound "EmuPercussion:9" # amp 1.0 # room 0.04 # size 0.8
 swipe = sound "EmuPercussion:8" # amp 1.1 # room 0.04 # size 0.8
 woodblock = sound "EmuPercussion:12" # amp 0.8 # room 0.01 # size 0.8
@@ -63,11 +63,14 @@ toms2A = sound "EmuToms:6" # toms2 # speed (2 ** (2 / 12)) # pan 0.35 -- f
 toms2B = sound "EmuToms:7" # toms2 # speed (2 ** (3 / 12)) # pan 0.45 -- cs
 toms2C = sound "EmuToms:7" # toms2 # pan 0.55 -- af
 toms2D = sound "EmuToms:8" # toms2 # pan 0.65 -- f
-snare1 = sound "EmuSnare:3" # amp 0.6 # room 0.15 # size 0.7 # shape 0.7 # crush 7.5 # speed 1.02 # hpf 250
-snare2 = sound "EmuSnare:5" # amp 0.8 # room 0.04 # size 0.8 # shape 0.6 # hpf 200
-snare3 = sound "EmuSnare:6" # amp 0.8 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
+snare1 = sound "EmuSnare:3" # amp 0.6 # room 0.2 # size 0.85 # dry 1.7 # shape 0.6 # crush 7.5 # speed 1.02 # hpf 250
+snare2 = sound "EmuSnare:5" # amp 0.9 # room 0.04 # size 0.8 # shape 0.6 # hpf 200
+snare3 = sound "EmuSnare:6" # amp 0.9 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
 snare4 = sound "EmuSnare:7" # amp 0.35 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
-snare5 = sound "EmuSnare:9" # amp 1.0 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
+snare5 = sound "EmuSnare:9" # amp 1.1 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
+
+-- SAMPLES
+metallic = sound "Metallic:0" # amp 0.22 # shape 0.2 # coarse 1.5 # speed (2 ** (-8 / 12)) # room 0.6 # size 0.75 # hpf 300 -- # coarse (range 1.7 1.5 $ (slow 8 saw)) -- TODO tune the fuck out of this and give it a range of courseness 
 
 -- VOCALS
 vocals = sound "Vocals" # room 0.15 # size 0.8 # amp 0.5
@@ -94,18 +97,27 @@ d6 $ slowcat ["~", "~", note "~ ~ ~ ~ ~ ~ c ~", note "~ ~ [~ ~] [~ c]"] # toms1D
 
 -- EXPERIMENTATION 3
 setbpm(138)
-d1 $ slowcat [note "af2 af2 af2 bf2 ~ ~ ~ ~", note "~"] # legato "1 1 1 13 1 1 1 1 1" # prophecy
+d1 $ slowcat [note "af2 af2 af2 bf2 ~ ~ ~ ~", note "~"] # legato "1 1 1 13 1 1 1 1 1" # prophecyLead
 setbpm(114)
-d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ df3 ~ ~" # legato "3 2 3 1", note "a2 ~ ~ a2 ~ ~ ~ ~" # legato "3 5 1", note "a2 ~ ~ a2 ~ c3 ~ ~" # legato "3 2 3 1"] # prophecy
+d1 $ slowcat [note "bf2 ~ ~ bf2 ~ ~ ~ ~" # legato "3 5 1", note "bf2 ~ ~ bf2 ~ df3 ~ ~" # legato "3 2 3 1", note "a2 ~ ~ a2 ~ ~ ~ ~" # legato "3 5 1", note "a2 ~ ~ a2 ~ c3 ~ ~" # legato "3 2 3 1"] # prophecyLead
 
 -- EXPERIMENTATION 4
 setbpm(87)
-makeSideChain 3 0 0.55 0.003 0.02
+makeSideChain 3 0 0.4 0.003 0.02
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare4
 d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1>" # end "<1 1 1 0.74>" # gain "1.0 0.75 0.75 0.75"
 d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
-d5 $ slowcat [note "[c*4]*4", note "[[c*4] [c*4] [c*4] [c c [c c c ~] ~]]"] # hihatClosed
+d5 $ slowcat [note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "~ ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ c c ~ c ~ c c"] # hihatClosed
+d5 $ slowcat [note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c c c c ~ c c ~ c ~ c c", note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c ~ c c [c c c ~] ~ c ~ c c c c"] # hihatClosed
+d5 $ slowcat [note "~ c c c c ~ c c c ~ c c c ~ c c", note "~ c c c c ~ c c c ~ c c c ~ c c", note "c ~ c c c ~ c c c ~ c c c c c c", note "~ c c c c ~ c c c c c [c c c ~] ~ c c c"] # hihatClosed
+d5 $ slowcat [note "c*16", note "[[c*4] [c*4] [c*4] [c c [c c c ~] ~]]", note "c*16", note "[[c*4] [c*4] [c*4] [c c [c*4] [c*4]]]"] # hihatClosed
+d6 $ slowcat [note "[[~ ~ ~ c5] [ds5 ~ ~ d5 ~ ~ c5 ~]]", note "[[~ ~ ~ c5] [ds5 ~ ~ b4 ~ ~ d5 ~]]", note "[[~ ~ ~ c5] [ds5 ~ ~ d5 ~ ~ c5 ~]]", note "[[~ ~ f5 ~ ~ ~ c5 ~] [ds5 ~ ~ b4 ~ ~ d5 ~]]"] # metallic
 clearSideChain 3 0
+
+-- EXPERIMENTATION 5
+setbpm(60)
+d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c"] # kick
+d2 $ note "~ c ~ c" # snare1
 
 hush

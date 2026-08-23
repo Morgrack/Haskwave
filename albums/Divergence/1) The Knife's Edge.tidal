@@ -1,7 +1,7 @@
 -- INTRO
 setbpm(80)
 -- add knife sharpening samples getting progressively more distorted
-makeSideChain 1 0 0.55 0.01 0.03
+makeSideChain 1 0 0.4 0.01 0.03
 filterSweep = djf $ range 0 0.5 $ (slow 8 saw)
 d1 $ slowcat ((replicate 7 ("c*4")) ++ ["c c c ~"]) # kick
 d2 $ slowcat [note "[g3*4]*2 [af3*4]*2", note "[a3*4]*2 [bf3*4]*2", note "[fs3*4]*2 [g3*4]*2", note "[a3*4]*2 [bf3*4]*2"] # bass # filterSweep
