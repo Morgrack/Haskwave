@@ -9,8 +9,8 @@ d2 $ note "~ ~ ~ ~ c ~ ~ ~ ~ ~ ~ ~ ~ ~ c ~" # snare4
 d3 $ slowcat [note "[c c] [c ~] ~ ~" # pan "[0.9 0.1]*4", note "[c c] [c ~] ~ ~" # pan "[0.1 0.9]*4"] # cymbalCrash
 d4 $ slowcat [note "~ ~ [cs*6] [cs*6] [cs*6] [cs*6] [cs*6] ~"] # toms2C # gain (1 - rand * 0.08) -- jazz up this pattern
 d5 $ slowcat [pattern1, pattern1, pattern1, pattern1 # accelerate 0.05, pattern1, pattern1, pattern1, pattern1 # accelerate (-0.05)] # prophecyLead -- change this to "commandment" synth or synth based on octave down prophecy idea
-d6 $ slowcat [pattern2, pattern3, pattern2, pattern3, pattern2, pattern3, pattern2, pattern2] # sound "supersaw" -- change this to a custom synth 1, probably phased
-d7 $ slowcat ["~", "~", "~", "~", pattern2, pattern3, pattern2, pattern2] # sound "supersaw" # octave 6 -- change this to a custom synth 1, probably phased
+d6 $ slowcat [pattern2, pattern3, pattern2, pattern3, pattern2, pattern3, pattern2, pattern2] # metallic # octave 4 -- change this to a custom synth 1, probably phased
+d7 $ slowcat ["~", "~", "~", "~", pattern2, pattern3, pattern2, pattern2] # metallic # octave 5 -- change this to a custom synth 1, probably phased
 -- add unique SFX to each phrase
 -- add vocals
 hush

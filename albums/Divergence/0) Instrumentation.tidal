@@ -41,18 +41,18 @@ bass = stack [bass1, bass2, bass3] # room 0.17 # size 0.8
 clap = sound "EmuPercussion:3" # amp 1.2 # room 0.04 # size 0.8
 cowbell = sound "EmuPercussion:7" # amp 0.8 # room 0.02 # size 0.8
 heartbeat = sound "EmuKick:9" # amp 1.0 # room 0.05 # size 0.8 # lpf 2500
-kick = sound "EmuKick:2" # amp 1.25 # shape (-0.15) -- af
+kick = sound "EmuKick:2" # amp 1.2 # shape (-0.25) -- af
 slap = sound "EmuPercussion:9" # amp 1.0 # room 0.04 # size 0.8
 swipe = sound "EmuPercussion:8" # amp 1.1 # room 0.04 # size 0.8
 woodblock = sound "EmuPercussion:12" # amp 0.8 # room 0.01 # size 0.8
 agogoHigh = sound "EmuPercussion:0" # amp 0.7 # room 0.1 # size 0.7 # distort 0.7 # hpf 250
 agogoLow = sound "EmuPercussion:1" # amp 0.6 # room 0.1 # size 0.7 # distort 0.7
-cymbalChina = sound "EmuCymbals:0" # amp 0.4 # room 0.15 # size 0.8
-cymbalCrash = sound "OberheimCymbals:0" # amp 0.85 # room 0.15 # size 0.8 # shape 0.2 # speed 0.98
-cymbalRide = sound "OberheimCymbals:1" # amp 0.4 # room 0.15 # size 0.8
-hihatClosed = sound "EmuHiHat:0" # amp 0.35 # room 0.03 # size 0.8
-hihatPartial = sound "EmuHiHat:1" # amp 0.6 # room 0.03 # size 0.8
-hihatOpen = sound "EmuHiHat:2" # amp 0.6 # room 0.03 # size 0.8
+cymbalChina = sound "EmuCymbals:0" # amp 0.4 # room 0.2 # size 0.8
+cymbalCrash = sound "OberheimCymbals:0" # amp 0.85 # room 0.2 # size 0.8 # shape 0.2 # speed 0.98
+cymbalRide = sound "OberheimCymbals:1" # amp 0.4 # room 0.2 # size 0.8
+hihatClosed = sound "EmuHiHat:0" # amp 0.3 # room 0.03 # size 0.8
+hihatPartial = sound "EmuHiHat:1" # amp 0.45 # room 0.03 # size 0.8
+hihatOpen = sound "EmuHiHat:2" # amp 0.45 # room 0.03 # size 0.8
 toms1 = amp 0.5 # room 0.07 # size 0.8 # shape 0.3 # hpf 250
 toms1A = stack [sound "EmuToms:3" # toms1 # speed (2 ** (2 / 12)) # pan 0 # nudge 0.025, sound "EmuToms:3" # toms1 # speed (2 ** (2 / 12)) # pan 1]
 toms1B = stack [sound "EmuToms:4" # toms1 # speed (2 ** (3 / 12)) # pan 0 # nudge 0.025, sound "EmuToms:4" # toms1 # speed (2 ** (3 / 12)) # pan 1]
@@ -64,13 +64,14 @@ toms2B = sound "EmuToms:7" # toms2 # speed (2 ** (3 / 12)) # pan 0.45 -- cs
 toms2C = sound "EmuToms:7" # toms2 # pan 0.55 -- af
 toms2D = sound "EmuToms:8" # toms2 # pan 0.65 -- f
 snare1 = sound "EmuSnare:3" # amp 0.6 # room 0.2 # size 0.85 # dry 1.7 # shape 0.6 # crush 7.5 # speed 1.02 # hpf 250
-snare2 = sound "EmuSnare:5" # amp 0.9 # room 0.04 # size 0.8 # shape 0.6 # hpf 200
-snare3 = sound "EmuSnare:6" # amp 0.9 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
-snare4 = sound "EmuSnare:7" # amp 0.35 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
-snare5 = sound "EmuSnare:9" # amp 1.1 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
+snare2 = sound "EmuSnare:5" # amp 0.8 # room 0.04 # size 0.8 # shape 0.6 # hpf 200
+snare3 = sound "EmuSnare:6" # amp 0.85 # room 0.04 # size 0.8 # shape 0.8 # hpf 200
+snare4 = sound "EmuSnare:7" # amp 0.31 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
+snare5 = sound "EmuSnare:9" # amp 1.0 # room 0.04 # size 0.8 # shape 0.85 # crush 6.0 # speed 1.02 # hpf 225
 
 -- SAMPLES
-metallic = sound "Metallic:0" # amp 0.22 # shape 0.2 # coarse 1.5 # speed (2 ** (-8 / 12)) # room 0.6 # size 0.75 # hpf 300 -- # coarse (range 1.7 1.5 $ (slow 8 saw)) -- TODO tune the fuck out of this and give it a range of courseness 
+metallic = sound "Metallic:0" # speed (2 ** (-6 / 12)) # amp 0.07 # shape 0.85 # coarse 2.1 # krush 0.2 # room 0.3 # size 0.8 
+metallic = sound "Metallic:2" # amp 0.22 # shape 0.2 # coarse 1.5 # speed (2 ** (-8 / 12)) # room 0.6 # size 0.75 # hpf 300
 
 -- VOCALS
 vocals = sound "Vocals" # room 0.15 # size 0.8 # amp 0.5
@@ -106,7 +107,7 @@ setbpm(87)
 makeSideChain 3 0 0.4 0.003 0.02
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare4
-d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1>" # end "<1 1 1 0.74>" # gain "1.0 0.75 0.75 0.75"
+d3 $ slowcat [note "c", note "~", note "~", note "~ ~ ~ c"] # cymbalCrash # speed "<1 1 1 -1>" # end "<1 1 1 0.74>" # gain "1.0 0.74 0.74 0.74"
 d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
 d5 $ slowcat [note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "~ ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ c c ~ c ~ c c"] # hihatClosed
 d5 $ slowcat [note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c c c c ~ c c ~ c ~ c c", note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c ~ c c [c c c ~] ~ c ~ c c c c"] # hihatClosed
