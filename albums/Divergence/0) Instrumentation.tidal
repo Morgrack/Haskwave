@@ -21,6 +21,67 @@ chorus (pBase, pWidth, vBase, vWidth, sWidth, aLevel) (synthPattern) = stack [le
 
 setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist, uses 4/4 time signature
 
+-- PERCUSSION
+anvil = sound "Metallic:0" # speed (2 ** (-6 / 12)) # amp 0.08 # shape 0.85 # coarse 2.1 # krush 0.2 # room 0.3 # size 0.8 
+cymbal = sound "EmuCymbals:1" # amp 0.7 # coarse 1.7 # room 0.25 # size 0.8
+hihat = stack [sound "EmuHiHat:0" # amp 0.11 # speed (2 ** (4.5 / 12)) # pan 0.1 # nudge 0.005, sound "EmuHiHat:0" # amp 0.11 # speed (2 ** (4.5 / 12)) # pan 0.9] # cut 1
+kick = sound "EmuKick:3" # amp 0.7 # shape 0.2 # coarse 1.53
+sideStick = sound "EmuSnare:3" # amp 0.9 # room 0.04 # size 0.8
+
+--SNARES
+snare1 = sound "EmuSnare:8" # amp 0.9 # room 0.05 # size 0.8 # shape 0.7 # hpf 175
+snare2 = sound "EmuSnare:9" # amp 0.3 # room 0.15 # size 0.7 # shape 0.9 # crush 7.0 # speed 1.01
+snare3 = sound "EmuSnare:11" # amp 1.0 # room 0.05 # size 0.8 # shape 0.75 # crush 6.0 # speed 1.02 # hpf 200
+
+--TOMS
+toms1 = room 0.1 # size 0.8 # coarse 1.7
+toms1A = toms1 # sound "EmuToms:0" # amp 0.5 # pan 0.3 # speed (2 ** (5 / 12)) -- b
+toms1B = toms1 # sound "EmuToms:0" # amp 0.5 # pan 0.4 -- fs
+toms1C = toms1 # sound "EmuToms:1" # amp 0.35 # pan 0.55 # speed (2 ** (3 / 12)) -- d
+toms1D = toms1 # sound "EmuToms:1" # amp 0.35 # pan 0.65 -- b
+toms2 = amp 0.5 # room 0.05 # size 0.8 -- TODO: redo this
+toms2A = toms2 # sound "EmuToms:2" # pan 0.3 -- d
+toms2B = toms2 # sound "EmuToms:3" # pan 0.4 -- a
+toms2C = toms2 # sound "EmuToms:4" # pan 0.55 -- f
+toms2D = toms2 # sound "EmuToms:4" # pan 0.65 # speed (2 ** (-3 / 12))  -- d
+toms3 = amp 0.5 # room 0.07 # size 0.8 -- TODO: redo this
+toms3A = toms3 # sound "EmuToms:5" # pan 0.3 -- af
+toms3B = toms3 # sound "EmuToms:6" # pan 0.4 -- ef
+toms3C = toms3 # sound "EmuToms:6" # pan 0.65 # speed (2 ** (-4 / 12)) -- b
+toms3D = toms3 # sound "EmuToms:7" # pan 0.65 # speed (2 ** (3 / 12)) -- af
+toms4 = room 0.07 # size 0.8 # shape 0.3 # hpf 300 -- TODO: redo this
+toms4A = toms4 # sound "EmuToms:8" # amp 0.5 # pan 0.35 -- d
+toms4B = toms4 # sound "EmuToms:9" # amp 0.5 # pan 0.45 -- a
+toms4C = toms4 # sound "EmuToms:9" # amp 0.5 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
+toms4D = toms4 # sound "EmuToms:10" # amp 0.4 # pan 0.65 -- d
+
+-- VOCALS
+
+--TEST
+setbpm(130)
+d1 $ note "c*4" # kick
+d2 $ note "~ c ~ c" # snare1
+d3 $ note "c*16" # hihat
+d4 $ note (slow 2 "c") # cymbal
+d6 $ slowcat [note "~", note "~ ~ ~ [c ~ ~ ~]"] # toms1A
+d7 $ slowcat [note "~", note "~ ~ ~ [~ c ~ ~]"] # toms1B
+d8 $ slowcat [note "~", note "~ ~ ~ [~ ~ c ~]"] # toms1C
+d9 $ slowcat [note "~", note "~ ~ ~ [~ ~ ~ c]"] # toms1D
+
+
+d2 $ slowcat [note "~ c ~ c", note "~ c ~ [c ~ c]" # cut 1 # gain "1.0 1.0 1.0 1.0 0.85"] # snare2
+d3 $ note "[~ ~ c] ~ ~ ~" # sideStick
+d4 $ note (slow 2 "c") # cymbal
+d5 $ note "c*12" # hihat
+d6 $ slowcat [note "~", note "~ ~ [~ ~ c] [~ ~ ~]"] # toms1A
+d7 $ slowcat [note "~", note "~ ~ [~ ~ ~] [c ~ ~]"] # toms1B
+d8 $ slowcat [note "~", note "~ ~ [~ ~ ~] [~ c ~]"] # toms1C
+d9 $ slowcat [note "~", note "~ ~ [~ ~ ~] [~ ~ c]"] # toms1D
+d10 $ slowcat [note "[e5 fs5] [g5 fs5 e5]", note "[a5 g5 fs5] [g5 fs5 ds5]", note "[e5 fs5] [g5 fs5 a5]", note "[b5 c6 b5] [b5 c6 b5]"] # anvil
+hush
+
+
+
 -- PROPHECY LEAD
 prophecyLead1 = chorus (0.5, 1.0, 0.9, 0.1, 0.0, 0.7) (sound "supersaw" # sustain 0.25 # release 0.25 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 150)
 prophecyLead2 = chorus (0.5, 1.0, 0.9, 0.1, 0.0, 0.6) (sound "supersaw" # attack 0.05 # release 999 # lfo 1.0 # rate 0.1 # resonance 0.7 # crush 2.5 # bpf 70 # bpq 10 # hpf 120)
@@ -31,7 +92,7 @@ prophecyLead6 = sound "supersaw" # voice 0.05 # amp 0.2 # attack 0.05 # release 
 prophecyLead = stack [prophecyLead1, prophecyLead2, prophecyLead3, prophecyLead4, prophecyLead5, prophecyLead6] # room 0.15 # size 0.9
 
 -- SIMPLE LEAD
-simpleLead = chorus (0.5, 0.2, 0.05, 0.04, 0.006, 0.3) (sound "supersaw" # sustain 1.0 # release 1.0 # lfo 15.0 # rate 0.1 # resonance 0.3) # room 0.25 # size 0.9
+simpleLead = chorus (0.5, 0.45, 0.07, 0.04, 0.006, 0.1) (sound "supersaw" # sustain 1.0 # release 1.0 # lfo 15.0 # rate 0.05 # resonance 0.3) # room 0.25 # size 0.9
 
 -- KNIFE'S EDGE LEAD
 knifesEdgeLead = chorus (0.5, 0.1, 0.7, 0.1, 0.015, 0.045) (sound "supersaw" # lfo 1.0 # crush 1.5 # resonance 0.15 # phasdp 2.0 # phasr 0.5 # hpf 200 # lpf 12000) # room 0.3 # size 0.9
@@ -128,11 +189,126 @@ setbpm(60)
 d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c"] # kick
 d2 $ note "~ c ~ c" # snare1
 
--- EXPERIMENTATIOn 6
+-- EXPERIMENTATION 6
 setbpm(135)
-d1 $ note "c*4" # kick
+d3 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare5
 d3 $ slowcat [note "e ~ ~ f ~ ~ e ~", note "~ d ~ ~ f ~ d ~", note "e ~ ~ f ~ ~ e ~", note "~ d ~ ~ g ~ d ~"] # simpleLead
-d5 $ note "c*8" # hihatClosed
+d5 $ note "c*8" # hihat
+
+--EXPERIMENTATION 7
+setbpm(75)
+
+kick = sound "EmuKick:10" # amp 0.7 # shape 0.4
+snare = stack [sound "hardcore:3" # amp 0.9 # shape 0.8 # gain 0.85, sound "SimmonsSnare:14" # amp 0.6 # shape 0.2] # room 0.45 # size 0.8
+hihat = stack [sound "SimmonsHiHat:1" # amp 0.27 # pan 0.1 # nudge 0.005, sound "SimmonsHiHat:1" # amp 0.27 # pan 0.9] # room 0.3 # size 0.9
+lead = chorus (0.5, 0.45, 0.07, 0.04, 0.006, 0.3) (sound "supersaw" # sustain 1.3 # release 1.3 # lfo 15.0 # rate 0.05 # resonance 0.3) # room 0.25 # size 0.9
+mid = chorus (0.5, 0.4, 0.4, 0.03, 0.01, 0.4) (sound "supersaw" # lfo 6 # rate 0.05 # resonance 0.3 # hpf 300) # room 0.25 # size 0.9 
+bass1 = chorus (0.5, 0.1, 0.2, 0.05, 0.00, 0.25) (sound "supersaw" # sustain 0.3 # release 0.21 # lfo 0.2 # rate 0.8 # resonance 0.05)
+bass2 = sound "supersaw" # voice 0.7 # amp 0.65 # nudge 0.03 # sustain 0.3 # release 0.21 # lfo 1.0 # octave 4 # lpf 100
+bass = stack [bass1, bass2] # room 0.25 # size 0.85
+
+do 
+    makeSideChain 0 3 0.8 0.001 0.1
+    makeSideChain 1 3 0.8 0001 0.1
+    makeSideChain 2 3 0.5 0.001 0.04
+
+-- EVENT HORIZON
+
+
+hush
+-- INTRO
+do 
+    let filterSweep = djf $ range 1.0 0.5 $ (slow 8 saw) -- apply this to each track separately as is easier than having to handle orbit reverb in a stack
+    d1 $ slowcat [note "[[af5 e5] [ef5 b4]]*2", note "[af5 e5] [ef5 b4] [bf4 b4] [df5 ef5]"] # lead # filterSweep 
+    d2 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # mid # filterSweep
+    d3 $ slowcat [note "ef3*16", note "[ef3*4] [ef3*4] [ef3*4] [e3*4]", note "fs3*16", note "[fs3*4] [fs3*4] [fs3*4] [e3*4]"] # bass # gain 1.1 # filterSweep
+    -- whispering poetry aboard a space ship
+
+-- CHORUS
+do
+    d1 $ slowcat [note "[[af5 e5] [ef5 b4]]*2", note "[af5 e5] [ef5 b4] [bf4 b4] [df5 ef5]"] # lead
+    d2 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # mid
+    d3 $ slowcat [note "ef3*16", note "[ef3*4] [ef3*4] [ef3*4] [e3*4]", note "fs3*16", note "[fs3*4] [fs3*4] [fs3*4] [e3*4]"] # bass # gain 1.1
+    d4 $ note "c*4" # kick
+    d5 $ note "~ c ~ c" # snare
+    -- falling white noise
+    -- coarse simmons toms
+    -- very chorus pad
+
+-- VERSE
+do
+    d2 silence
+    -- change up lead a bit
+    d6 $ note "c*8" # hihat # gain "<1 0.8>*8" --only for latter half
+    -- rising white noise
+    -- coarse simmons toms
+    -- whispering poetry aboard a space ship
+
+-- CHORUS
+do 
+    d2 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # mid
+    d6 silence
+    -- falling white noise
+    -- coarse simmons toms
+    -- very chorus pad
+
+-- VERSE
+do
+    d2 silence
+    d6 $ note "c*8" # hihat # gain "<1 0.8>*8"
+    -- rising
+    -- coarse simmons toms
+    -- whispering poetry aboard a space ship
+
+-- CHORUS
+do
+    d2 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # mid
+    d6 silence
+    -- falling white noise
+    -- coarse simmons toms
+    -- very chorus pad
+
+-- BRIDGE
+do 
+    d4 silence
+    d5 silence
+    d6 $ slowcat ((replicate 6 (note "c*4")) ++ [note "c*8", note "[c*4] [c*6]"]) # hihat
+    -- rising white noise
+    -- coarse simmons toms but slightly longer pattern
+    -- whispering poetry aboard a space ship, very intense ending in screaming as we enter the event horizon
+    -- space ship blasting through space, soaring sounds
+
+-- CHORUS (2x)
+do 
+    d4 $ note "c*4" # kick
+    d5 $ note "~ c ~ c" # snare
+    d6 silence
+    -- we introduce du duuuuuu du duuuuu du duuuuuu du du duuu synth on top of everything
+    -- falling white noise
+    -- very chorus pad
+
+-- OUTRO
+do
+    d2 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ gf3"] # mid
+    d3 silence
+    d5 silence
+
+hush
+
+setbpm(160)
+kick1 = sound "hardcore:5" # amp 1.0
+kick2 = sound "hardcore:4" # amp 1.6
+hihat = sound "hardcore:0" # amp 1.0
+snare = sound "hardcore:3" # amp 0.7 # shape 0.8
+stuff = sound "hardcore:5" # amp 1.0
+d2 $ note "c*4" # kick1
+d3 $ note "c*4" # kick2
+d4 $ note "~ c ~ c" # snare
+d5 $ swingBy (1/4) 4 $ note "c*8" # hihat
+brynth1 = chorus (0.5, 0.7, 0.25, 0.05, 0.02, 0.14) (sound "supersaw" # lfo 20.0 # rate 0.01 # resonance 0.5 # shape 0.7 # crush 3.0)
+brynth2 = chorus (0.5, 0.7, 1.0, 0.1, 0, 0.1) (sound "supernoise" # shape 0.2)
+brynth = stack [brynth1, brynth2]
+d1 $ slowcat [note "d6 cs6 b5 ~ f6 ~ ~ ~" # legato "1 1 1 1 3 1 1 1", note "fs6 ~"] # brynth
 
 hush
