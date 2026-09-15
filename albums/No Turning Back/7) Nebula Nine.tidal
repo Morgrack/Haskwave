@@ -1,1 +1,53 @@
-setbpm(60)
+-- SETUP
+do
+    setbpm(60)
+    makeSidechain 4 0 0.85 0.001 0.05
+
+-- INTRO
+do 
+    panic
+    resetCycles
+    let filterSweep min = hpf $ rangex 20000 min $ (slow 2 saw)
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c"] # kick # filterSweep 20
+    d5 $ note "c3*16" # noTurningBackBass # filterSweep 20
+
+-- VERSE
+do
+    resetCycles
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c", note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d2 $ note "[~ c]*2" # snare
+    d5 $ slowcat [note "c3*16", note "c3*16", note "c3*16", note "[c3*8] [c3*4 [c3 d3 d3 d3]]"] # noTurningBackBass
+
+-- CHORUS
+do
+    d1 $ slowcat [note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d2 $ note "[~ c]*2" # snare
+    d3 $ slowcat [note "c*16", note "[c*8] [c*4 [c c c ~]]", note "c*16", note "[c*8] [c*4 [c c c ~]]"] # hihatClosed
+    d4 $ slowcat [note "c" # cut 1 # gain 0, note "~ ~ ~ [~ ~ ~ c]" # cut 1, note "c" # cut 1 # gain 0, note "~ ~ ~ [~ ~ ~ c]"] # hihatOpen
+    d5 $ slowcat [note "ef3*16", note "ef3*16", note "ef3*16", note "[ef3*8] [ef3*4 [ef3 d3 d3 d3]]"] # noTurningBackBass
+
+-- VERSE
+do
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c", note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d2 $ note "[~ c]*2" # snare
+    d3 silence
+    d4 silence
+    d5 $ slowcat [note "c3*16", note "c3*16", note "c3*16", note "[c3*8] [c3*4 [c3 d3 d3 d3]]"] # noTurningBackBass
+
+-- CHORUS
+do
+    d1 $ slowcat [note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d2 $ note "[~ c]*2" # snare
+    d3 $ slowcat [note "c*16", note "[c*8] [c*4 [c c c ~]]", note "c*16", note "[c*8] [c*4 [c c c ~]]"] # hihatClosed
+    d4 $ slowcat [note "c" # cut 1 # gain 0, note "~ ~ ~ [~ ~ ~ c]" # cut 1, note "c" # cut 1 # gain 0, note "~ ~ ~ [~ ~ ~ c]"] # hihatOpen
+    d5 $ slowcat [note "ef3*16", note "ef3*16", note "ef3*16", note "[ef3*8] [ef3*4 [ef3 d3 d3 d3]]"] # noTurningBackBass
+
+-- BRIDGE
+
+hush
+
+-- TODO
+-- vocals
+-- breathe in, breathe out
+-- slow down music in bridge
+-- hihat velocity

@@ -34,19 +34,26 @@ hihat = stack [sound "EmuHiHat:1" # pan 0.1 # nudge 0.005, sound "EmuHiHat:1" # 
 kick = sound "EmuKick:3" # amp 0.8 # shape 0.2 # coarse 1.53
 snare1 = sound "EmuSnare:8" # amp 0.9 # coarse 1.6 # shape 0.7 # hpf 175 # room 0.04 # size 0.7
 toms = shape 0.3 # hpf 250 # room 0.15 # size 0.7
-toms1 = toms # sound "EmuToms:8" # amp 0.75 # pan 0.3 -- d
-toms2 = toms # sound "EmuToms:9" # amp 0.75 # pan 0.4 -- a
-toms3 = toms # sound "EmuToms:9" # amp 0.75 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
-toms4 = toms # sound "EmuToms:10" # amp 0.65 # pan 0.65 -- d
+toms1 = toms # sound "EmuToms:8" # amp 0.85 # pan 0.3 -- d
+toms2 = toms # sound "EmuToms:9" # amp 0.85 # pan 0.4 -- a
+toms3 = toms # sound "EmuToms:9" # amp 0.85 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
+toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
--- DIVERGENCE BASS
+-- BASS
+divergenceBassR = 0.125
+divergenceBass1 = unison 2 (0.5, 0.55, 1.2, 0.1, 0.037, 0.7) (sound "supersaw" # attack 0.02 # sustain 0.2 # release divergenceBassR # lfo 11.0 # rate 1.0 # resonance 0.25 # shape 0.4 # hpf 100)
+divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.55 # attack 0.02 # release divergenceBassR # lfo 1.0 # rate 1.0 # resonance 0.1 # lpf 100 # octave 4 
+divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.25 # size 0.7
+
+-- EXPERIMENT
 divergenceBassR = 0.13
-divergenceBass1 = unison 2 (0.5, 0.3, 0.6, 0.2, (-0.01), 0.3) (sound "supersquare" # sustain 0.15 # release divergenceBassR # lfo 6.0 # rate 0.1 # resonance 0.38 # shape 0.3)
-divergenceBass2 = sound "supersquare" # voice 0.4 # amp 0.6 # sustain 0.15 # release divergenceBassR # lfo 1.0 # rate 0.1 # resonance 0.1 # octave 4
+divergenceBass1 = unison 2 (0.5, 0.3, 0.6, 0.2, (-0.01), 0.4) (sound "supersquare" # sustain 0.15 # release divergenceBassR # lfo 6.0 # rate 0.1 # resonance 0.38 # shape 0.3)
+divergenceBass2 = sound "supersquare" # voice 0.4 # amp 0.75 # sustain 0.15 # release divergenceBassR # lfo 1.0 # rate 0.1 # resonance 0.1 # octave 4
 divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.3 # size 0.8
 
 -- EXPERIMENT
 setbpm(140)
+makeSidechain 8 0 0.9 0.001 0.1
 d1 $ note "c*4" # kick
 d2 $ note "[~ c]*2" # snare1
 d3 $ slowcat [note "c*12", note "[c*3] [c*3] [c*3] [c*6]"] # hihat
