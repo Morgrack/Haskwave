@@ -41,15 +41,15 @@ toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- BASS
 divergenceBassR = 0.125
-divergenceBass1 = unison 2 (0.5, 0.55, 1.2, 0.1, 0.037, 0.7) (sound "supersaw" # attack 0.02 # sustain 0.2 # release divergenceBassR # lfo 11.0 # rate 1.0 # resonance 0.25 # shape 0.4 # hpf 100)
-divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.55 # attack 0.02 # release divergenceBassR # lfo 1.0 # rate 1.0 # resonance 0.1 # lpf 100 # octave 4 
+divergenceBass1 = unison 2 (0.5, 0.55, 1.2, 0.1, 0.037, 0.75) (sound "supersaw" # attack 0.02 # sustain 0.2 # release divergenceBassR # lfo 11.0 # rate 1.0 # resonance 0.25 # shape 0.4 # hpf 100)
+divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.5 # attack 0.02 # release divergenceBassR # lfo 1.0 # rate 1.0 # resonance 0.1 # lpf 100 # octave 4 
 divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.25 # size 0.7
 
 -- EXPERIMENT
-divergenceBassR = 0.13
-divergenceBass1 = unison 2 (0.5, 0.3, 0.6, 0.2, (-0.01), 0.4) (sound "supersquare" # sustain 0.15 # release divergenceBassR # lfo 6.0 # rate 0.1 # resonance 0.38 # shape 0.3)
-divergenceBass2 = sound "supersquare" # voice 0.4 # amp 0.75 # sustain 0.15 # release divergenceBassR # lfo 1.0 # rate 0.1 # resonance 0.1 # octave 4
-divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.3 # size 0.8
+experimentR = 0.13
+experiment1 = unison 2 (0.5, 0.3, 0.6, 0.2, (-0.01), 0.4) (sound "supersquare" # sustain 0.15 # release experimentR # lfo 6.0 # rate 0.1 # resonance 0.38 # shape 0.3)
+experiment2 = sound "supersquare" # voice 0.4 # amp 0.75 # sustain 0.15 # release experimentR # lfo 1.0 # rate 0.1 # resonance 0.1 # octave 4
+experiment = stack [experiment1, experiment2] # room 0.3 # size 0.8
 
 -- EXPERIMENT
 setbpm(140)
