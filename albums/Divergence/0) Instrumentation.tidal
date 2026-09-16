@@ -30,19 +30,19 @@ unison count (pBase, pWidth, vBase, vWidth, sWidth, aLevel) (synthPattern) = sta
 
 -- E-MU DRUMULATOR
 anvil = sound "Metallic:0" # speed (2 ** (-6 / 12)) # amp 0.08 # shape 0.85 # coarse (1.7 + rand * 0.6) # krush 0.25 # pan (0.45 + rand * 0.1) # room 0.3 # size 0.7
-hihat = stack [sound "EmuHiHat:1" # pan 0.1 # nudge 0.005, sound "EmuHiHat:1" # pan 0.9] # amp 0.16 # coarse 1.6
+hihat = stack [sound "EmuHiHat:1" # pan 0.1 # nudge 0.005, sound "EmuHiHat:1" # pan 0.9] # amp 0.17 # coarse 1.6
 kick = sound "EmuKick:3" # amp 0.8 # shape 0.2 # coarse 1.53
 snare1 = sound "EmuSnare:8" # amp 0.9 # coarse 1.6 # shape 0.7 # hpf 175 # room 0.04 # size 0.7
-toms = shape 0.3 # hpf 250 # room 0.15 # size 0.7
+toms = shape 0.3 # hpf 225 # room 0.15 # size 0.7
 toms1 = toms # sound "EmuToms:8" # amp 0.85 # pan 0.3 -- d
-toms2 = toms # sound "EmuToms:9" # amp 0.85 # pan 0.4 -- a
-toms3 = toms # sound "EmuToms:9" # amp 0.85 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
+toms2 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.4 -- a
+toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- BASS
-divergenceBassR = 0.125
-divergenceBass1 = unison 2 (0.5, 0.55, 1.2, 0.1, 0.037, 0.75) (sound "supersaw" # attack 0.02 # sustain 0.2 # release divergenceBassR # lfo 11.0 # rate 1.0 # resonance 0.25 # shape 0.4 # hpf 100)
-divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.5 # attack 0.02 # release divergenceBassR # lfo 1.0 # rate 1.0 # resonance 0.1 # lpf 100 # octave 4 
+divergenceBassR = 0.135 -- 0.135 @ 140 BPM
+divergenceBass1 = unison 2 (0.5, 0.55, 1.2, 0.1, 0.037, 0.6) (sound "supersaw" # attack 0.022 # sustain 0.2 # release divergenceBassR # lfo 10 # rate 1.0 # resonance 0.35 # coarse 2.15 # shape 0.5 # hpf 100)
+divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.3 # attack 0.022 # release divergenceBassR # lfo 1.0 # rate 1.0 # resonance 0.1 # lpf 100 # octave 4 
 divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.25 # size 0.7
 
 -- EXPERIMENT
