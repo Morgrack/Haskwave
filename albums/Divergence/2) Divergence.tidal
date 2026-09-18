@@ -1,1 +1,36 @@
-setbpm(87)
+-- SETUP
+do
+    makeSidechain 3 0 0.55 0.003 0.02 
+    setbpm(87)
+
+-- SECTION A
+do
+
+-- SECTION B
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "[~ c]*2" # snare2
+    d3 $ slowcat 
+        [
+            note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "~ ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ c c ~ c ~ c c",
+            note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c c c c ~ c c ~ c ~ c c", note "c ~ c ~ c c c c ~ c c ~ c c c c", note "~ c c ~ c ~ c c [c c c ~] ~ c ~ c c c c",
+            note "~ c c c c ~ c c c ~ c c c ~ c c", note "~ c c c c ~ c c c ~ c c c ~ [c c c ~] c", note "c ~ c c c ~ c c c ~ c c c c c c", note "~ c c c c ~ c c c c c [c c c ~] ~ c c c",
+            note "c*16", note "[[c*4] [c*4] [c*4] [c c [c c c ~] ~]]", note "c*16", note "[[c*4] [c*4] [c*4] [c c [c*4] [c*4]]]"
+        ] # hihat
+    d4 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # divergenceBass
+    d5 $ slowcat [note "c5 ef5 d5 c5", note "ef5 c5 ef5 d5", note "ef5 f5 ef5 d5", note "ef5 d5 c5 b4"] # anvil # pan 0.25
+    d6 $ rotR 0.125 $ slowcat [note "c5 c5 c5 c5", note "c5 c5 c5 c5", note "c5 c5 c5 c5", note "c5 c5 c5 b4"] # anvil # pan 0.75
+
+-- SECTION C
+do
+
+-- SECTION D
+do
+
+-- TODO:
+-- add main noise
+-- add Golgotha-style howls in section B
+-- add I'm Sorry-style synth to section C
+-- add metal hitting scorching hot anvil with sparks flying off SFX
+-- add vocals
+-- mastering

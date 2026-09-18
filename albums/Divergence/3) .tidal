@@ -1,1 +1,13 @@
-setbpm(135)
+-- chorus
+do 
+    setcps(135 / 60 / 7)
+
+    d1 $ note "c*7" # kick
+    d2 $ slowcat ["~ c ~ c ~ c ~", "c ~ c ~ c ~ c"] # snare1
+    d3 $ note "[c*2] [c*2] [c*2] [c*2] [c [c*4]] [c [c*4]] [c [c*4]]" # hihat
+    d4 $ note "~ f ~ f ~ f ~ f ~ gf ~ f ~ ef" # sound "superpiano"
+
+
+do
+    setcps(135 / 60 / 4)
+    hush
