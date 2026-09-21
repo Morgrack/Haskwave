@@ -34,6 +34,7 @@ hihat = stack [sound "EmuHiHat:1" # pan 0.1 # nudge 0.005, sound "EmuHiHat:1" # 
 kick = sound "EmuKick:3" # amp 0.9 # shape 0.2 # coarse 1.53
 snare1 = sound "EmuSnare:8" # amp 0.9 # coarse 1.6 # shape 0.7 # hpf 175 # room 0.04 # size 0.7
 snare2 = sound "EmuSnare:9" # amp 0.3 # crush 7.0 # shape 0.9 # speed 1.01 # room 0.2 # size 0.7
+snare3 = sound "EmuSnare:11" # amp 1.1 # coarse 1.75 # shape 0.8 # speed 1.02 # hpf 200 # room 0.04 # size 0.7
 toms = shape 0.3 # hpf 250 # room 0.15 # size 0.7
 toms1 = toms # sound "EmuToms:8" # amp 0.85 # pan 0.3 -- d
 toms2 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.4 -- a
@@ -41,10 +42,16 @@ toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- DIVERGENCE BASS
-divergenceBassR = 0.17 -- 0.135 @ 140 BPM / 0.22 @ 130 BPM / 0.17 @ 87 BPM
+divergenceBassR = 0.23 -- 0.135 @ 140 BPM / 0.23 @ 130 BPM / 0.17 @ 87 BPM
 divergenceBass1 = unison 2 (0.5, 0.6, 1.2, 0.1, 0.037, 0.85) (sound "supersaw" # attack 0.022 # sustain 0.23 # release divergenceBassR # lfo 10 # rate 1.2 # resonance 0.35 # coarse 2.15 # shape 0.5 # hpf 100)
-divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.45 # attack 0.022 # sustain 0.24 # release divergenceBassR # lfo 1.0 # rate 1.2 # resonance 0.1 # lpf 100 # octave 4 
+divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.45 # attack 0.022 # sustain 0.23 # release divergenceBassR # lfo 1.0 # rate 1.2 # resonance 0.1 # lpf 100 # octave 4 
 divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.2 # size 0.7
+
+-- EXPERIMENT
+experiment1 = unison 2 (0.5, 0.9, 1.0, 0.15, 0.00, 0.25) (sound "supernoise" # attack 0.15 # release 999 # resonance 0.25 # lpf 10000 # hpf 100 # coarse 1.6 # distort 0.95 # shape 0.5)
+experiment2 = unison 2 (0.5, 0.75, 1.0, 0.1, 0.015, 1.0) (sound "supersaw" # lfo 1.0 # rate 0.1 # resonance 0.65 # crush 3.0 # coarse 1.7 # bpf 70 # bpq 10 # hpf 120)
+experiment3 = unison 2 (0.5, 0.6, 0.7, 0.1, 0.01, 0.4) (sound "supersaw" # attack 0.15 # release 999 # lfo 6.0 # rate 0.8 # resonance 0.05 # lpf 6000 # octave 4)
+experiment = stack [experiment1, experiment2, experiment3] # room 0.45 # size 0.7
 
 -- EXPERIMENT
 experimentR = 0.13

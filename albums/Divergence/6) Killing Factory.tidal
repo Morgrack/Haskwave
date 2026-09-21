@@ -1,7 +1,7 @@
 -- SETUP
 do
     setbpm(130)
-    makeSidechain 2 0 0.9 0.001 0.05
+    makeSidechain 2 0 0.85 0.001 0.05
 
 -- VERSE
 do
@@ -13,5 +13,7 @@ do
             note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
             note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
             note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 gs3 gs3 gs3 fs3 fs3 fs3 fs3"
-        ] # divergenceBass
+        ] # divergenceBass # room 0.4 # gain 0.95
     d4 $ note "c*8" # hihat
+
+    -- second verse bring in machine samples
