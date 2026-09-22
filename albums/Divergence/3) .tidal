@@ -1,13 +1,12 @@
 -- SETUP
 do 
-    makeSidechain 3 0 0.7 0.01 0.055
+    makeSidechain 3 0 0.7 0.01 0.053
 
 -- CHORUS
 do
     setcps(135 / 60 / 7)
     d1 $ note "c*7" # kick
-    d2 $ slowcat ["~ c ~ c ~ c ~", "c ~ c ~ c ~ c"] # snare3
-    d3 $ note "[c*2] [c*2] [c*2] [c*2] [c [c*8]] [c [c*8]] [c [c*8]]" # hihat # cut 1 # gain 0.95
-    d4 $ note "f3 ~ f3 ~ f3 ~ f3 ~ gf3 ~ f3 ~ ef3 ~" # legato "2 2 2 2 2 2 2" # experiment # gain 1.1
+    d2 $ slowcat ["~ c ~ c ~ c ~", "c ~ c ~ c ~ c"] # snare -- change this
+    d3 $ note "[c*2] [c*2] [c*2] [c*2] [c [c*8]] [c [c*8]] [c [c*8]]" # hihat # cut 1 # gain 0.92
+    d4 $ note "f3 f3 f3 f3 gf3 f3 ef3" # experiment # gain 1.1
     d2 silence
-    hush

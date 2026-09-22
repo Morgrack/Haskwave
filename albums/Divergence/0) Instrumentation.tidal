@@ -42,16 +42,16 @@ toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- DIVERGENCE BASS
-divergenceBassR = 0.23 -- 0.135 @ 140 BPM / 0.23 @ 130 BPM / 0.17 @ 87 BPM
+divergenceBassR = 0.17 -- 0.135 @ 140 BPM / 0.22 @ 130 BPM / 0.17 @ 87 BPM
 divergenceBass1 = unison 2 (0.5, 0.6, 1.2, 0.1, 0.037, 0.85) (sound "supersaw" # attack 0.022 # sustain 0.23 # release divergenceBassR # lfo 10 # rate 1.2 # resonance 0.35 # coarse 2.15 # shape 0.5 # hpf 100)
 divergenceBass2 = sound "supersaw" # voice 0.1 # amp 0.45 # attack 0.022 # sustain 0.23 # release divergenceBassR # lfo 1.0 # rate 1.2 # resonance 0.1 # lpf 100 # octave 4 
 divergenceBass = stack [divergenceBass1, divergenceBass2] # room 0.2 # size 0.7
 
 -- EXPERIMENT
-experiment1 = unison 2 (0.5, 0.9, 1.0, 0.15, 0.00, 0.22) (sound "supernoise" # attack 0.15 # release 999 # resonance 0.01 # hpf 100 # coarse 1.6 # distort 0.95 # shape 0.5)
-experiment2 = unison 2 (0.5, 0.75, 1.15, 0.1, 0.015, 1.1) (sound "supersaw" # lfo 1.0 # rate 0.1 # resonance 0.65 # crush 3.0 # coarse 1.7 # bpf 70 # bpq 10 # hpf 120)
+experiment1 = unison 2 (0.5, 0.9, 1.0, 0.15, 0.00, 0.28) (sound "supernoise" # attack 0.15 # release 999 # resonance 0.01 # hpf 100 # coarse 1.55 # distort 0.73 # shape 0.5)
+experiment2 = unison 2 (0.5, 0.75, 1.15, 0.1, 0.015, 1.1) (sound "supersaw" # lfo 1.0 # rate 0.1 # resonance 0.65 # crush 3.0 # coarse 1.7 # bpf 67 # bpq 10 # hpf 120)
 experiment3 = unison 2 (0.5, 0.6, 0.7, 0.1, 0.01, 0.4) (sound "supersaw" # attack 0.15 # release 999 # lfo 6.0 # rate 0.8 # resonance 0.05 # lpf 6000 # octave 4)
-experiment = stack [experiment1, experiment2, experiment3] # room 0.45 # size 0.7
+experiment = stack [experiment1, experiment2, experiment3] # room 0.35 # size 0.7
 
 -- EXPERIMENT
 experimentR = 0.13
