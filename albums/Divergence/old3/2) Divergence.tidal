@@ -9,7 +9,7 @@ do
 -- SECTION B
 do
     d1 $ note "c*4" # kick
-    d2 $ note "[~ c]*2" # snare2
+    d2 $ note "[~ c]*2" # snare3
     d3 $ slowcat 
         [
             note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "~ ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ ~ c ~ c ~ c c", note "c ~ c ~ c ~ c c ~ c c ~ c ~ c c",

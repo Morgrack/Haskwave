@@ -6,7 +6,7 @@ do
 -- VERSE
 do
     d1 $ note "c c [~ c] c" # kick
-    d2 $ note "[~ c]*2" # snare2
+    d2 $ note "[~ c]*2" # snare3
     d3 $ slowcat 
         [
             note "e3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
