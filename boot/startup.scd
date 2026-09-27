@@ -147,10 +147,10 @@ s.reboot { // server options are only updated on reboot
 
 			~sidechains = Dictionary.new;
 
-			~makeSidechain = { |sourceOrbit, controlOrbit, slopeAbove, clampTime, relaxTime|
+			~createSidechain = { |sourceOrbit, controlOrbit, slopeAbove, clampTime, relaxTime|
 				var key, bus, ndefName;
 				key = sourceOrbit.asString ++ "," ++ controlOrbit.asString;
-				if (~sidechains[key].notNil) { ~clearSidechain.(sourceOrbit, controlOrbit); };
+				if (~sidechains[key].notNil) { ~deleteSidechain.(sourceOrbit, controlOrbit); };
 				bus = Bus.audio(s, 2);
 				~dirt.orbits[sourceOrbit].outBus = bus;
 				ndefName = ("sidechain_" ++ sourceOrbit ++ "_" ++ controlOrbit).asSymbol;
@@ -171,7 +171,7 @@ s.reboot { // server options are only updated on reboot
 				("Created sidechain: orbit % controlled by orbit %".format(sourceOrbit, controlOrbit)).postln;
 			};
 
-			~clearSidechain = { |sourceOrbit, controlOrbit|
+			~deleteSidechain = { |sourceOrbit, controlOrbit|
 				var key = sourceOrbit.asString ++ "," ++ controlOrbit.asString;
 				var sidechain = ~sidechains[key];
 				if (sidechain.notNil)
@@ -180,41 +180,41 @@ s.reboot { // server options are only updated on reboot
 					~dirt.orbits[sourceOrbit].outBus = 0;
 					sidechain[\bus].free;
 					~sidechains.removeAt(key);
-					("Removed sidechain: orbit % controlled by orbit %".format(sourceOrbit, controlOrbit)).postln;
+					("Deleted sidechain: orbit % controlled by orbit %".format(sourceOrbit, controlOrbit)).postln;
 				};
 			};
 
-			~clearAllSidechains = {
+			~clearSidechains = {
 				var orbits, sourceOrbit, controlOrbit;
 				var keys = ~sidechains.keys;
 				keys.do { |key|
 					orbits = key.split($,);
 					sourceOrbit = orbits[0].asInteger;
 					controlOrbit = orbits[1].asInteger;
-					~clearSidechain.(sourceOrbit, controlOrbit)
+					~deleteSidechain.(sourceOrbit, controlOrbit)
 				};
 				~sidechains.clear;
-				("Cleared all sidechains").postln;
+				("Cleared sidechains").postln;
 			};
 
-			OSCdef(\makeSidechain, { |msg|
+			OSCdef(\createSidechain, { |msg|
 				var sourceOrbit = msg[1];
 				var controlOrbit = msg[2];
 				var slopeAbove = msg[3] ? 0.5;
 				var clampTime = msg[4] ? 0.05;
 				var relaxTime = msg[5] ? 0.1;
-				~makeSidechain.(sourceOrbit, controlOrbit, slopeAbove, clampTime, relaxTime);
-			}, '/makeSidechain');
+				~createSidechain.(sourceOrbit, controlOrbit, slopeAbove, clampTime, relaxTime);
+			}, '/createSidechain');
 
-			OSCdef(\clearSidechain, { |msg|
+			OSCdef(\deleteSidechain, { |msg|
 				var sourceOrbit = msg[1];
 				var controlOrbit = msg[2];
-				~clearSidechain.(sourceOrbit, controlOrbit);
-			}, '/clearSidechain');
+				~deleteSidechain.(sourceOrbit, controlOrbit);
+			}, '/deleteSidechain');
 
-			OSCdef(\clearAllSidechains, { |msg|
-				~clearAllSidechains.();
-			}, '/clearAllSidechains');
+			OSCdef(\clearSidechains, { |msg|
+				~clearSidechains.();
+			}, '/clearSidechains');
 
 		);
 
@@ -260,7 +260,7 @@ s.reboot { // server options are only updated on reboot
 
 				var sound = MoogFF.ar(input, oscillation, resonance * 4);
 				sound = sound.tanh * 2;
-				
+
 				Out.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
 
 			}).add;
