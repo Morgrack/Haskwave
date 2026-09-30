@@ -1,0 +1,43 @@
+-- IMPORTS
+import qualified Sound.Osc.Fd as O
+import qualified Sound.Osc.Transport.Fd.Udp as O
+
+-- SIDECHAINING
+scUdp <- O.openUdp "127.0.0.1" 57120
+
+createSidechain sourceOrbit controlOrbit slopeAbove clampTime relaxTime = do 
+    O.sendMessage scUdp (O.message "/createSidechain" [O.int32 sourceOrbit, O.int32 controlOrbit, O.float slopeAbove, O.float clampTime, O.float relaxTime])
+
+deleteSidechain sourceOrbit controlOrbit = do
+    O.sendMessage scUdp (O.message "/deleteSidechain" [O.int32 sourceOrbit, O.int32 controlOrbit])
+
+clearSidechains = do
+    O.sendMessage scUdp (O.message "/clearSidechains" [])
+
+-- SYNTHESIZERS
+waveform = pF "waveform"
+unison = pF "unison"
+detune = pF "detune"
+skew = pF "skew"
+width = pF "width"
+pulse = pF "pulse"
+
+-- UTILS
+chorus (cAmp, cPan, cWidth, cNudge) (pattern) = stack [pattern # amp (cAmp / 2) # pan (cPan - (cWidth / 2)) # nudge cNudge, pattern # amp (cAmp / 2) # pan (cPan + (cWidth / 2))]
+setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist
+
+-- SAMPLES
+anvil = sound "Metallic:0" # amp 0.06 # shape 0.85 # krush 0.25 # coarse (1.7 + rand * 0.6) # speed (2 ** (-6 / 12)) # pan (0.45 + rand * 0.1) # room 0.3 # size 0.7
+
+-- E-MU DRUMULATOR
+hihat = chorus (0.3, 0.5, 0.8, 0.005) (sound "EmuHiHat:1" # coarse 1.6)
+kick = sound "EmuKick:3" # amp 0.9 # shape 0.2 # coarse 1.53
+snare1 = sound "EmuSnare:0" # amp 1.3 # shape 0.2 # coarse 1.44 # hpf 150 # room 0.1 # size 0.7
+snare2 = sound "EmuSnare:8" # amp 0.9 # shape 0.7 # coarse 1.6 # hpf 175 # room 0.04 # size 0.7
+snare3 = sound "EmuSnare:9" # amp 0.37 # shape 0.9 # crush 7.0 # speed 1.01 # room 0.15 # size 0.7
+snare4 = sound "EmuSnare:11" # amp 1.1 # shape 0.8 # coarse 1.73 # hpf 200 # room 0.04 # size 0.7
+toms = shape 0.3 # hpf 250 # room 0.15 # size 0.7
+toms1 = toms # sound "EmuToms:8" # amp 0.85 # pan 0.3 -- d
+toms2 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.4 -- a
+toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
+toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d

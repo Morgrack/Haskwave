@@ -18,10 +18,10 @@ clearSidechains = do
 waveform = pF "waveform"
 unison = pF "unison"
 detune = pF "detune"
-scatter = pF "scatter"
+skew = pF "skew"
+width = pF "width"
 pulse = pF "pulse"
 
---UTILS
-chorusL (cPan, cWidth, cNudge, cAmp) (pattern) = stack [pattern # pan cPan-(cWidth/2) # nudge cNudge # amp cAmp/2, pattern # pan cPan+(cWidth/2) # amp cAmp/2]
-chorusR (cPan, cWidth, cNudge, cAmp) (pattern) = stack [pattern # pan cPan-(cWidth/2) # amp cAmp/2, pattern # pan cPan+(cWidth/2) # nudge cNudge # amp cAmp/2]
+-- UTILS
+chorus (cAmp, cPan, cWidth, cNudge) (pattern) = stack [pattern # amp (cAmp / 2) # pan (cPan - (cWidth / 2)) # nudge cNudge, pattern # amp (cAmp / 2) # pan (cPan + (cWidth / 2))]
 setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist
