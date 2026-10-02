@@ -221,26 +221,30 @@ s.reboot { // server options are only updated on reboot
 		//SYNTHESIZERS
 		(
 
-			SynthDef(\moogan, { |out, pan, accelerate, freq, speed, decay=0, sustain=1, waveform=0, unison=1, detune=0, skew=0, width=0, lfo=1, rate=1, resonance=0.25, pulse=0.5|
+			SynthDef(\moogan, { |out, pan, accelerate, freq, speed, decay=0, sustain=1, waveform=0, unison=1, detune1=0, detune2=0, scatter1=0, scatter2=0, lfo=1, rate=1, resonance=0.25, phase=0, pulse=0.5|
 
 				var env = EnvGen.ar(Env.pairs([[0,0], [0.05,1], [0.2,1-decay], [0.95,1-decay], [1,0]], -3), timeScale:sustain, doneAction:2);
 
 				var frequency = freq * DirtFreqScale.kr(speed, accelerate, sustain);
 
 				var divisions = max(unison - 1, 1);
+				var middle = divisions / 2;
 
-				var detuneLeft = 1 - (detune / 2);
-				var detuneStep = detune / divisions;
-				var detuneMultipliers = Array.fill(16, { |i| detuneLeft + (detuneStep * i) });
+				var detuneLeft = 1 - (detune1 / 2);
+				var detuneStep = detune1 / divisions;
+				var detuneMultipliers = Array.fill(16, { |i|
+					var skewLeft = i < middle;
+					var skewRight = i > middle;
+					detuneLeft + (detuneStep * i) - (skewLeft * detune2) + (skewRight * detune2);
+				});
 
-				var skewCentre = divisions / 2;
-				var scWidth = width * 2; //Pan 2 is from -1 to 1
-				var widthLeft = 0 - (scWidth / 2);
-				var widthStep = scWidth / divisions;
-				var widthValues = Array.fill(16, { |i|
-					var doSkewLeft = i < skewCentre;
-					var doSkewRight = i > skewCentre;
-					widthLeft + (widthStep * i) - (doSkewLeft * skew) + (doSkewRight * skew);
+				var scScatter1 = scatter1 * 2; //Pan2 is from -1 to 1
+				var scatterLeft = 0 - (scScatter1 / 2);
+				var scatterStep = scScatter1 / divisions;
+				var scatterValues = Array.fill(16, { |i|
+					var skewLeft = i < middle;
+					var skewRight = i > middle;
+					scatterLeft + (scatterStep * i) - (skewLeft * scatter2) + (skewRight * scatter2);
 				});
 
 				var harmonicsMultiplier = Select.kr(waveform, [1, 10, 10, 10]); //sine waves have no harmonics above base frequency
@@ -251,12 +255,12 @@ s.reboot { // server options are only updated on reboot
 					var active = i < unison;
 					Pan2.ar(
 						(Select.ar(waveform, [
-							SinOsc.ar(frequency * detuneMultipliers[i]),
-							LFTri.ar(frequency * detuneMultipliers[i]),
+							SinOsc.ar(frequency * detuneMultipliers[i], phase),
+							LFTri.ar(frequency * detuneMultipliers[i], phase),
 							Pulse.ar(frequency * detuneMultipliers[i], pulse),
-							SawDPW.ar(frequency * detuneMultipliers[i])
+							SawDPW.ar(frequency * detuneMultipliers[i], phase)
 						])) * active,
-						widthValues[i]
+						scatterValues[i]
 					);
 				});
 
@@ -264,7 +268,7 @@ s.reboot { // server options are only updated on reboot
 					SinOsc.kr(frequency / 64 * rate, 0).range(lowerLFO, upperLFO),
 					LFTri.kr(frequency / 64 * rate, 0.5).range(lowerLFO, upperLFO),
 					SinOsc.kr(frequency / 64 * rate, 0).range(lowerLFO, upperLFO),
-					LFTri.kr(frequency / 64 * rate, 0.5).range(lowerLFO, upperLFO),
+					LFTri.kr(frequency / 64 * rate, 0.5).range(lowerLFO, upperLFO)
 				]);
 
 				var sound = MoogFF.ar(input, oscillation, resonance * 4);

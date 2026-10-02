@@ -17,9 +17,11 @@ clearSidechains = do
 -- SYNTHESIZERS
 waveform = pF "waveform"
 unison = pF "unison"
-detune = pF "detune"
-skew = pF "skew"
-width = pF "width"
+detune1 = pF "detune1"
+detune2 = pF "detune2"
+scatter1 = pF "scatter1"
+scatter2 = pF "scatter2"
+phase = pF "phase"
 pulse = pF "pulse"
 
 -- UTILS
@@ -36,8 +38,24 @@ snare1 = sound "EmuSnare:0" # amp 1.3 # shape 0.2 # coarse 1.44 # hpf 150 # room
 snare2 = sound "EmuSnare:8" # amp 0.9 # shape 0.7 # coarse 1.6 # hpf 175 # room 0.04 # size 0.7
 snare3 = sound "EmuSnare:9" # amp 0.37 # shape 0.9 # crush 7.0 # speed 1.01 # room 0.15 # size 0.7
 snare4 = sound "EmuSnare:11" # amp 1.1 # shape 0.8 # coarse 1.73 # hpf 200 # room 0.04 # size 0.7
-toms = shape 0.3 # hpf 250 # room 0.15 # size 0.7
+toms = shape 0.3 # hpf 250
 toms1 = toms # sound "EmuToms:8" # amp 0.85 # pan 0.3 -- d
 toms2 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.4 -- a
 toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -- f
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
+
+-- BASS
+bassR = 0.17
+bass1 = sound "moogan" # amp 0.4 # attack 0.022 # sustain 0.23 # release bassR # waveform 1 # unison 2 # detune1 0.04 # scatter2 0.4 # lfo 10 # rate 8 # resonance 0.5 # phase 1.2 # distort 0.17 # shape 0.5 # octave 6
+bass2 = sound "moogan" # amp 1.1 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # unison 6 # detune1 0.12 # detune2 (-0.0171) # scatter2 0.5 # lfo 10.5 # rate 1.2 # resonance 0.4 # coarse 2.15 # shape 0.5 # hpf 75
+bass3 = sound "moogan" # amp 0.8 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # octave 4 # lfo 5 # lpf 150
+bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.7
+
+-- EXPERIMENT
+setbpm(87)
+createSidechain 4 0 0.55 0.003 0.02 
+d1 $ note "c*4" # kick
+d2 $ note "[~ c]*2" # snare3
+d3 $ note "c*16" # hihat
+d4 $ note "c ef d ef" # anvil
+d5 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass

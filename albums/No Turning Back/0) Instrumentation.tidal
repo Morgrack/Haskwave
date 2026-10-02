@@ -17,9 +17,11 @@ clearSidechains = do
 -- SYNTHESIZERS
 waveform = pF "waveform"
 unison = pF "unison"
-detune = pF "detune"
-skew = pF "skew"
-width = pF "width"
+detune1 = pF "detune1"
+detune2 = pF "detune2"
+scatter1 = pF "scatter1"
+scatter2 = pF "scatter2"
+phase = pF "phase"
 pulse = pF "pulse"
 
 -- UTILS
