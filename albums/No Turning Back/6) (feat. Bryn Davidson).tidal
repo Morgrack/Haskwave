@@ -1,0 +1,12 @@
+setbpm(77)
+
+d1 $ slowcat [note "~", note "af gf f df ~ ~ gf f"] # sound "superpiano" # sound "superpiano" # amp 0.6 # room 0.3 # size 0.9 -- singing
+d2 $ slowcat [note "bf3 bf3 bf3 ~ bf3 ~ bf3 bf3 bf3 bf3 bf3 ~ bf3 ~ bf3 bf3", note "df4 df4 df4 ~ df4 ~ df4 df4 af3 af3 af3 ~ c4 ~ c4 c4"] # sound "superpiano" # amp 0.4 # room 0.3 # size 0.9 -- swirly guitar
+
+d1 $ slowcat [note "fs6 f6 ~ fs6 f6 ~ fs6 f6 ~ fs6 f6 ~ fs6 f6 ds6 cs6", note "fs6 f6 ~ fs6 f6 ~ fs6 f6 ~ fs6 f6 ~ gs6 fs6 f6 fs6"] # experimentalLead # gain 0.93 -- toms to match this, sing short on on beat then offbeat, echo this once with small synth at end of phrase as bridge
+
+d3 $ slowcat [note "[f3*8] [f3*8]", note "[df3*8] [ef3*8]"] # bass
+
+-- combine both in final chorus
+
+hush

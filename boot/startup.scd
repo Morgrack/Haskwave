@@ -221,7 +221,7 @@ s.reboot { // server options are only updated on reboot
 		//SYNTHESIZERS
 		(
 
-			SynthDef(\moogan, { |out, pan, accelerate, freq, speed, decay=0, sustain=1, waveform=0, unison=1, detune1=0, detune2=0, scatter1=0, scatter2=0, lfo=1, rate=1, resonance=0.25, phase=0, pulse=0.5|
+			SynthDef(\moogan, { |out, pan, accelerate, freq, speed, decay=0, sustain=1, waveform=0, unison=1, detune1=0, detune2=0, scatter1=0, scatter2=0, lfo=1, rate=1, resonance=0.25, instability=0, phase=0, pulse=0.5|
 
 				var env = EnvGen.ar(Env.pairs([[0,0], [0.05,1], [0.2,1-decay], [0.95,1-decay], [1,0]], -3), timeScale:sustain, doneAction:2);
 
@@ -251,14 +251,16 @@ s.reboot { // server options are only updated on reboot
 				var lowerLFO = min(frequency * harmonicsMultiplier, 22000);
 				var upperLFO = min(lowerLFO * (lfo + 1), 22000);
 
+				var halfInstability = instability / 2;
+
 				var input = (1 / unison) * Mix.arFill(16, { |i|
 					var active = i < unison;
 					Pan2.ar(
 						(Select.ar(waveform, [
-							SinOsc.ar(frequency * detuneMultipliers[i], phase),
-							LFTri.ar(frequency * detuneMultipliers[i], phase),
-							Pulse.ar(frequency * detuneMultipliers[i], pulse),
-							SawDPW.ar(frequency * detuneMultipliers[i], phase)
+							SinOsc.ar(frequency * detuneMultipliers[i], phase + (Rand(-1, 1) * halfInstability)),
+							LFTri.ar(frequency * detuneMultipliers[i], phase + (Rand(-1, 1) * halfInstability)),
+							Pulse.ar(frequency * detuneMultipliers[i], pulse + (Rand(-1, 1) * halfInstability)),
+							SawDPW.ar(frequency * detuneMultipliers[i], phase + (Rand(-1, 1) * halfInstability))
 						])) * active,
 						scatterValues[i]
 					);

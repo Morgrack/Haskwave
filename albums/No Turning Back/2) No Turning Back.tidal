@@ -1,0 +1,5 @@
+setcps(85 / 60 / 4)
+d1 $ slowcat [note "c4*16", note "[df4*8] [ef4*4 df4*4]", note "c4*16", note "[bf3*8] [af3*4 bf3*4]"] # sound "superpiano" # room 0.3 # size 0.9 -- bass plus Solar Movement style mid synth, brass and singing
+
+setcps(85 / 60 / 10)
+d1 $ note "c ~ ~ [~ c f g] af [~ ~ g f] ef [~ g] d [~ g]" # legato 2 # sound "superpiano" # room 0.3 # size 0.9 -- brass transition in, like A New World, cymbal hits

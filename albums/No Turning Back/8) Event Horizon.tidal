@@ -1,0 +1,100 @@
+-- TODO
+-- riser
+-- vocals
+
+-- SETUP
+do
+    setbpm(75)
+    createSidechain 7 0 0.5 0.001 0.04
+    createSidechain 8 0 0.8 0.001 0.1
+    createSidechain 9 0 0.8 0.001 0.1
+    createSidechain 10 0 0.85 0.001 0.1
+
+-- INTRO
+do
+    panic
+    resetCycles
+    let filterSweep min = hpf $ rangex 20000 min $ (slow 8 saw)
+    d8 $ slowcat [note "ef3*16", note "[ef3*4] [ef3*4] [ef3*4] [e3*4]", note "fs3*16", note "[fs3*4] [fs3*4] [fs3*4] [e3*4]"] # bass # filterSweep 20
+    d9 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # eventHorizonMid # filterSweep 75
+    d10 $ slowcat [note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [bf5 b5] [df6 ef6]"] # eventHorizonLead # filterSweep 20
+    
+-- CHORUS
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare
+    d3 $ slowcat ((replicate 7 (note "~")) ++ [note "~ ~ [~ c5] [~ ~]"]) # toms2 # pan 0.25 --ef
+    d4 $ slowcat ((replicate 7 (note "~")) ++ [note "~ ~ [~ ~] [b4 ~]"]) # toms3 # pan 0.5 --bf
+    d5 $ slowcat ((replicate 7 (note "~")) ++ [note "~ ~ [~ ~] [~ bf4]"]) # toms4 # pan 0.7 --gf
+    d8 $ slowcat [note "ef3*16", note "[ef3*4] [ef3*4] [ef3*4] [e3*4]", note "fs3*16", note "[fs3*4] [fs3*4] [fs3*4] [e3*4]"] # bass
+    d9 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # eventHorizonMid
+    d10 $ slowcat [note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [bf5 b5] [df6 ef6]"] # eventHorizonLead
+    
+-- VERSE
+do
+    d6 $ slowcat ((replicate 4 (note "~")) ++ (replicate 4 (note "c*8" # hihat # gain "<1.1 0.95>*8")))
+    d9 silence
+    d10 $ slowcat 
+        [
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [af6 ef6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [ef6 e6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [af6 df6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [b6 bf6] [fs6 bf6]"
+        ]
+        # eventHorizonLead # sustain 1.1 # release 1.1 # phasdp 0
+
+-- CHORUS
+do
+    d6 silence
+    d9 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # eventHorizonMid
+    d10 $ slowcat [note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [bf5 b5] [df6 ef6]"] # eventHorizonLead
+
+-- VERSE
+do
+    d6 $ slowcat ((replicate 4 (note "~")) ++ (replicate 4 (note "c*8" # hihat # gain "<1.1 0.95>*8")))
+    d9 silence
+    d10 $ slowcat 
+        [
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [af6 ef6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [ef6 e6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [af6 gf6] [af6 df6]",
+            note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [b6 bf6] [fs6 bf6]"
+        ]
+        # eventHorizonLead # sustain 1.1 # release 1.1 # phasdp 0
+
+-- CHORUS
+do
+    d6 silence
+    d9 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3", note "b3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # eventHorizonMid
+    d10 $ slowcat [note "[[af6 e6] [ef6 b5]]*2", note "[af6 e6] [ef6 b5] [bf5 b5] [df6 ef6]"] # eventHorizonLead
+
+-- BRIDGE
+do
+    d1 silence
+    d2 silence
+    d3 $ slowcat ((replicate 6 (note "~")) ++ [note "~ ~ ~ ~", note "[c5 ~] ~ ~ [c5 ~ ~]"]) # toms2 # pan 0.25 --ef
+    d4 $ slowcat ((replicate 6 (note "~")) ++ [note "~ ~ ~ ~", note "[~ ~ ~ b4] ~ [~ b4] [~ b4 ~]"]) # toms3 # pan 0.5 --bf
+    d5 $ slowcat ((replicate 6 (note "~")) ++ [note "~ ~ ~ ~" ,note "~ [~ bf4] ~ [~ ~ bf4]"]) # toms3 # pan 0.7 --gf
+    d6 $ slowcat ((replicate 7 (note "c*8")) ++ [note "[c*4] [[c*2] [c*3]]"]) # hihat # gain 1.1
+    d11 $ slowcat ((replicate 7 (note "~")) ++ [note "~ ~ ~ ~ ~ ~ ~ a6" # legato 2]) # eventHorizonBrassOld
+
+-- CHORUS (x2)
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare
+    d3 silence
+    d4 silence
+    d5 silence
+    d6 silence
+    d7 $ slowcat [note "~ c ~ ~ ~ ~ ~ ~", note "~", note "~ c ~ ~ ~ ~ ~ ~", note "~"] # cymbal # gain 0.9
+    d10 $ slowcat [note "[[af6 e6] [ef6 b5]]*2" # gain "[0.9 1 1 1]*2", note "[af6 e6] [ef6 b5] [bf5 b5] [df6 ef6]" # gain "0.9 1 1 1 1 1 1 1"] # eventHorizonLead
+    d11 $ slowcat [note "~ af6 ~ ~ ~ ~ ~ ~" # legato 14.5, note "~ ~ ~ ~ ~ ~ ~ gf6" # legato 2, note "~ af6 ~ ~ ~ ~ ~ ~" # legato 14.5, note "~ ~ ~ ~ ~ ~ ~ a6" # legato 2] # eventHorizonBrassOld
+
+-- OUTRO
+do 
+    d2 silence
+    d7 silence
+    d8 silence
+    d9 $ slowcat [note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ gf3", note "af3 ~ ~ ~" # legato 7.3, note "~ ~ ~ a3"] # eventHorizonMid
+
+hush

@@ -1,0 +1,82 @@
+-- TODO
+-- soar
+-- pad
+-- bass
+-- breathing
+-- vocals
+
+-- SETUP
+do
+    setbpm(60)
+    createSidechain 2 0 0.9 0.001 0.05
+    createSidechain 4 0 0.85 0.001 0.05
+    createSidechain 5 0 0.93 0.001 0.05
+
+-- INTRO
+do
+    panic
+    resetCycles
+    let filterSweep min = hpf $ rangex 20000 min $ (slow 2 saw)
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c"] # kick # filterSweep 20
+    d5 $ note "c3*16" # bass # filterSweep 20
+
+-- VERSE
+do
+    resetCycles
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c", note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d2 $ note "~ c ~ c" # snare
+    d5 $ slowcat [note "c3*16", note "c3*16", note "c3*16", note "[c3*8] [c3*4 [c3 d3 d3 d3]]"] # bass
+    d6 $ slowcat [note "g3" # legato 3.93, note "~", note "~", note "~ ~ ~ g3" # accelerate (accelerateSemitones (3)) # legato 1.16] # nebulaNineMid
+
+-- CHORUS
+do
+    d1 $ slowcat [note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d3 $ "c*32" # hihat # gain 0.8
+    d5 $ slowcat [note "ef3*16", note "ef3*16", note "ef3*16", note "[ef3*8] [ef3*4 [ef3 d3 d3 d3]]"] # bass
+    d6 $ slowcat [note "bf3" # legato 3.93, note "~", note "~", note "~ ~ ~ bf3" # accelerate (accelerateSemitones (-3)) # legato 1.16] # nebulaNineMid
+    d8 $ note "bf6 ~ ef6 ~ ~ bf6 ~ d6 ~ d6 ~ d6 ef6 d6 c6 ~" # nebulaNineLead
+    d9 $ note "~ ~ ef5 ~ ~ ~ ~ d5 ~ ~ ~ ~ ~ ~ ~ ~" # nebulaNineLead2 # sustain 1.5 # release 1.5 # gain 1.2 # phase 0.6 # room 0.4 # size 0.9
+
+-- VERSE
+do
+    d1 $ slowcat [note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] c", note "c c [~ ~ ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d3 silence
+    d5 $ slowcat [note "c3*16", note "c3*16", note "c3*16", note "[c3*8] [c3*4 [c3 d3 d3 d3]]"] # bass
+    d6 $ slowcat [note "g3" # legato 3.93, note "~", note "~", note "~ ~ ~ g3" # accelerate (accelerateSemitones (3)) # legato 1.16] # nebulaNineMid
+    d8 silence
+    d9 silence
+
+-- CHORUS
+do
+    d1 $ slowcat [note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] c", note "c c [~ c ~ c] [c c c c]"] # kick
+    d3 $ "c*32" # hihat # gain 0.8
+    d5 $ slowcat [note "ef3*16", note "ef3*16", note "ef3*16", note "[ef3*8] [ef3*4 [ef3 d3 d3 d3]]"] # bass
+    d6 $ slowcat [note "bf3" # legato 3.93, note "~", note "~", note "~ ~ ~ bf3" # accelerate (accelerateSemitones (-3)) # legato 1.16] # nebulaNineMid
+    d8 $ note "bf6 ~ ef6 ~ ~ bf6 ~ d6 ~ d6 ~ d6 ef6 d6 c6 ~" # nebulaNineLead
+    d9 $ note "~ ~ ef5 ~ ~ ~ ~ d5 ~ ~ ~ ~ ~ ~ ~ ~" # nebulaNineLead2 # sustain 1.5 # release 1.5 # gain 1.2 # phase 0.6 # room 0.4 # size 0.9
+
+-- BRIDGE
+
+-- VERSE
+
+-- CHORUS
+
+-- VERSE
+
+-- CHORUS
+
+-- BRIDGE
+
+-- OUTRO
+
+
+hush
+panic
+-- d8 $ slowcat [note "~", note "~", note "~", note "~ ~ ~ c5" # accelerate (accelerateSemitones (3)) # legato 1.16] # nebulaNinePad
+-- d9 $ slowcat [note "~", note "~", note "~", note "~ ~ ~ g5" # accelerate (accelerateSemitones (4)) # legato 1.16] # nebulaNinePad # phase 1.05
+-- d10 $ slowcat [note "~", note "~", note "~", note "~ ~ ~ ef5" # accelerate (accelerateSemitones (3)) # legato 1.16] # nebulaNinePad # phase 1.1
+-- d11 $ slowcat [note "~", note "~", note "~", note "~ ~ ~ c5" # accelerate (accelerateSemitones (3)) # legato 1.16] # nebulaNinePad # phase 1.15
+-- d8 $ slowcat [note "ef6" # legato 3.93, note "~", note "~", note "~ ~ ~ ef6" # accelerate (accelerateSemitones (-3)) # legato 1.16] # nebulaNinePad 
+-- d9 $ slowcat [note "bf5" # legato 3.93, note "~", note "~", note "~ ~ ~ bf5" # accelerate (accelerateSemitones (-4)) # legato 1.16] # nebulaNinePad # phase 1.05
+-- d10 $ slowcat [note "g5" # legato 3.93, note "~", note "~", note "~ ~ ~ g5" # accelerate (accelerateSemitones (-3)) # legato 1.16] # nebulaNinePad # phase 1.1
+-- d11 $ slowcat [note "ef5" # legato 3.93, note "~", note "~", note "~ ~ ~ bf3" # accelerate (accelerateSemitones (-3)) # legato 1.16] # nebulaNinePad # phase 1.15

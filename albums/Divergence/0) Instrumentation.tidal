@@ -21,10 +21,12 @@ detune1 = pF "detune1"
 detune2 = pF "detune2"
 scatter1 = pF "scatter1"
 scatter2 = pF "scatter2"
+instability = pF "instability"
 phase = pF "phase"
 pulse = pF "pulse"
 
 -- UTILS
+accelerateSemitones semitones = 2 ** (semitones / 12) - 1
 chorus (cAmp, cPan, cWidth, cNudge) (pattern) = stack [pattern # amp (cAmp / 2) # pan (cPan - (cWidth / 2)) # nudge cNudge, pattern # amp (cAmp / 2) # pan (cPan + (cWidth / 2))]
 setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist
 
@@ -32,7 +34,8 @@ setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist
 anvil = sound "Metallic:0" # amp 0.06 # shape 0.85 # krush 0.25 # coarse (1.7 + rand * 0.6) # speed (2 ** (-6 / 12)) # pan (0.45 + rand * 0.1) # room 0.3 # size 0.7
 
 -- E-MU DRUMULATOR
-hihat = chorus (0.3, 0.5, 0.8, 0.005) (sound "EmuHiHat:1" # coarse 1.6)
+cymbal = sound "OberheimCymbals:0" # amp 0.9 # coarse 1.6 # room 0.2 # size 0.7
+hihat = chorus (0.25, 0.5, 0.8, 0.005) (sound "EmuHiHat:1" # coarse 1.6)
 kick = sound "EmuKick:3" # amp 0.9 # shape 0.2 # coarse 1.53
 snare1 = sound "EmuSnare:0" # amp 1.3 # shape 0.2 # coarse 1.44 # hpf 150 # room 0.1 # size 0.7
 snare2 = sound "EmuSnare:8" # amp 0.9 # shape 0.7 # coarse 1.6 # hpf 175 # room 0.04 # size 0.7
@@ -45,17 +48,20 @@ toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- BASS
-bassR = 0.17
+bassR = 0.12
 bass1 = sound "moogan" # amp 0.4 # attack 0.022 # sustain 0.23 # release bassR # waveform 1 # unison 2 # detune1 0.04 # scatter2 0.4 # lfo 10 # rate 8 # resonance 0.5 # phase 1.2 # distort 0.17 # shape 0.5 # octave 6
 bass2 = sound "moogan" # amp 1.1 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # unison 6 # detune1 0.12 # detune2 (-0.0171) # scatter2 0.5 # lfo 10.5 # rate 1.2 # resonance 0.4 # coarse 2.15 # shape 0.5 # hpf 75
 bass3 = sound "moogan" # amp 0.8 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # octave 4 # lfo 5 # lpf 150
 bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.7
 
 -- EXPERIMENT
-setbpm(87)
-createSidechain 4 0 0.55 0.003 0.02 
+setbpm(110)
+createSidechain 5 0 0.6 0.01 0.05
 d1 $ note "c*4" # kick
-d2 $ note "[~ c]*2" # snare3
+d2 $ note "~ c ~ c" # snare2
 d3 $ note "c*16" # hihat
-d4 $ note "c ef d ef" # anvil
-d5 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
+d4 $ slow 2 (note "c") # cymbal
+d6 $ slowcat [note "g3*16", note "bf3*16", note "d3*16", note "d3*16"] # bass # gain 1.3
+
+hush
+panic
