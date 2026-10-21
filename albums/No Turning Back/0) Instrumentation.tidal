@@ -42,9 +42,10 @@ toms3 = toms # pan 0.65 -- b
 toms4 = toms # speed (2 ** (-3 / 12)) # pan 0.8 -- af
 
 -- BASS
-bassR = 0.21 -- 0.21 @ 75 BPM, 0.25 @ 60 BPM
-bass1 = sound "moogan" # amp 0.9 # sustain 0.3 # release bassR # waveform 3 # unison 6 # detune1 0.01 # scatter1 0.2 # lfo 0.3 # rate 0.8 # resonance 0.05
-bass2 = sound "moogan" # amp 0.3 # sustain 0.3 # release bassR # waveform 3 # unison 3 # detune1 0.01 # lfo 0.3 # rate 0.8 # resonance 0.05 # phase 0.4 # octave 4
+bassLFO = 0.3
+bassRelease = 0.25 -- 0.21 for Event Horizon, 0.25 for Nebula Nine
+bass1 = sound "moogan" # amp 0.9 # sustain 0.3 # release bassR # waveform 3 # unison 6 # detune1 0.01 # scatter1 0.2 # lfo (bassLFO * 0.5) # rate 0.8 # resonance 0.05
+bass2 = sound "moogan" # amp 0.34 # sustain 0.3 # release bassR # waveform 3 # unison 3 # detune1 0.01 # lfo bassLFO # rate 0.8 # resonance 0.05 # phase 0.4 # octave 4
 bass = stack [bass1, bass2] # room 0.25 # size 0.85
 
 -- EVENT HORIZON MID

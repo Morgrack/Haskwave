@@ -34,9 +34,9 @@ setBPM bpm = setcps(bpm / 60 / 4) -- in case setbpm does not exist
 anvil = sound "Metallic:0" # amp 0.06 # shape 0.85 # krush 0.25 # coarse (1.7 + rand * 0.6) # speed (2 ** (-6 / 12)) # pan (0.45 + rand * 0.1) # room 0.3 # size 0.7
 
 -- E-MU DRUMULATOR
-cymbal = sound "OberheimCymbals:0" # amp 0.9 # coarse 1.6 # room 0.2 # size 0.7
+cymbal = sound "OberheimCymbals:0" # amp 0.6 # coarse 1.6 # room 0.2 # size 0.7
 hihat = chorus (0.25, 0.5, 0.8, 0.005) (sound "EmuHiHat:1" # coarse 1.6)
-kick = sound "EmuKick:3" # amp 0.9 # shape 0.2 # coarse 1.53
+kick = sound "EmuKick:3" # amp 1.0 # coarse 1.53
 snare1 = sound "EmuSnare:0" # amp 1.3 # shape 0.2 # coarse 1.44 # hpf 150 # room 0.1 # size 0.7
 snare2 = sound "EmuSnare:8" # amp 0.9 # shape 0.7 # coarse 1.6 # hpf 175 # room 0.04 # size 0.7
 snare3 = sound "EmuSnare:9" # amp 0.37 # shape 0.9 # crush 7.0 # speed 1.01 # room 0.15 # size 0.7
@@ -48,20 +48,29 @@ toms3 = toms # sound "EmuToms:9" # amp 0.9 # pan 0.55 # speed (2 ** (-4 / 12)) -
 toms4 = toms # sound "EmuToms:10" # amp 0.75 # pan 0.65 -- d
 
 -- BASS
-bassR = 0.12
-bass1 = sound "moogan" # amp 0.4 # attack 0.022 # sustain 0.23 # release bassR # waveform 1 # unison 2 # detune1 0.04 # scatter2 0.4 # lfo 10 # rate 8 # resonance 0.5 # phase 1.2 # distort 0.17 # shape 0.5 # octave 6
-bass2 = sound "moogan" # amp 1.1 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # unison 6 # detune1 0.12 # detune2 (-0.0171) # scatter2 0.5 # lfo 10.5 # rate 1.2 # resonance 0.4 # coarse 2.15 # shape 0.5 # hpf 75
-bass3 = sound "moogan" # amp 0.8 # attack 0.022 # sustain 0.23 # release bassR # waveform 3 # octave 4 # lfo 5 # lpf 150
-bass = stack [bass1, bass2, bass3] # room 0.2 # size 0.7
+bassLFO = 30
+bassRelease = 0.18
+bass1 = chorus (0.3, 0.5, 0.7, 0) (sound "supernoise" # sustain 0.4 # release bassRelease # voice 1.0 # distort 0.14 # lpf (bassLFO * 250))
+bass2 = sound "moogan" # amp 0.7 # sustain 0.4 # release bassRelease # waveform 3 # unison 2 # detune1 0.02 # scatter1 0.8 # lfo (bassLFO * 0.75) # resonance 0.1 # instability 0.1
+bass3 = sound "moogan" # amp 0.5 # sustain 0.4 # release bassRelease # waveform 2 # lfo bassLFO # resonance 0.4 # pulse 0.37 # octave 4 # instability 0.3
+bass = stack [bass1, bass2, bass3] # shape 0.5 # coarse (bassLFO * 0.01 + 2.0) # room 0.4 # size 0.7
 
 -- EXPERIMENT
 setbpm(110)
-createSidechain 5 0 0.6 0.01 0.05
+createSidechain 4 0 0.67 0.005 0.05
 d1 $ note "c*4" # kick
 d2 $ note "~ c ~ c" # snare2
 d3 $ note "c*16" # hihat
-d4 $ slow 2 (note "c") # cymbal
-d6 $ slowcat [note "g3*16", note "bf3*16", note "d3*16", note "d3*16"] # bass # gain 1.3
+d4 $ slow 4 (note "c") # cymbal
+d5 $ slowcat [note "g3*16", note "bf3*16", note "d3*16", note "d3*16"] # bass # gain 0.95
+
+-- EXPERIMENT
+setbpm(87)
+createSidechain 8 0 0.55 0.001 0.04
+d1 $ note "c*4" # kick
+d2 $ note "~ c ~ c" # snare3
+d3 $ note "c*16" # hihat
+d4 $ slow 4 (note "c") # cymbal
+d9 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass # gain 0.95
 
 hush
-panic

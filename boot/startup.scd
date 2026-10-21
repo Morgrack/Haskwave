@@ -142,6 +142,18 @@ s.reboot { // server options are only updated on reboot
 
 		);
 
+		//DJ FILTER FIX
+		(
+			SynthDef("dj-filter" ++ ~dirt.numChannels, { |out, djf|
+				var signal = In.ar(out, ~dirt.numChannels);
+				var hpf = djf.linexp(0.501, 1, 20, 20000);
+				var lpf = djf.linexp(0, 0.499, 20, 20000);
+				signal = Select.ar(djf > 0.5, [signal, RHPF.ar(signal, hpf)]);
+				signal = Select.ar(djf < 0.5, [signal, RLPF.ar(signal, lpf)]);
+				ReplaceOut.ar(out, signal);
+			}, [\ir]).add;
+		);
+
 		//SIDECHAINING
 		(
 
