@@ -1,0 +1,10 @@
+-- SETUP
+do
+    setbpm(160)
+
+-- CHORUS
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare3
+
+    hush

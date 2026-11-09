@@ -68,7 +68,8 @@ do
 -- BRIDGE
 
 -- OUTRO
-
+do
+    d5 $ slowcat [note "c3*16", note "g2*16", note "d3*16", note "ef3*8 f3*8"] # bass
 
 hush
 panic

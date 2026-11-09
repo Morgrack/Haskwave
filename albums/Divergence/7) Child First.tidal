@@ -1,0 +1,15 @@
+-- SETUP
+do
+    setbpm(120)
+
+-- INTRO
+
+-- CHORUS
+do
+    setbpm(100)
+    d1 $ note "c*4" # marchingKick
+    d2 $ note "~ c ~ c" # marchingSnare
+    d3 $ slowcat [note "c c ~ c c ~ c c ~ c c ~ [c*4] [c*4] [c*4] [c*4]", note "c c ~ c c ~ c c ~ c c ~ c ~ c ~"] # hihat
+    d5 $ slowcat [note "[fs3 fs3 e3 ~] [fs3 ~ e3 g3] [fs3 fs3 e3 ~] [a3 as3 b3 c4 cs4]", note "[fs3 fs3 e3 ~] [fs3 ~ e3 g3] [fs3 fs3 e3 ~] [a3 g3]"] # childFirstBass
+
+    hush

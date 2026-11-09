@@ -42,10 +42,10 @@ toms3 = toms # pan 0.65 -- b
 toms4 = toms # speed (2 ** (-3 / 12)) # pan 0.8 -- af
 
 -- BASS
-bassLFO = 0.3
-bassRelease = 0.25 -- 0.21 for Event Horizon, 0.25 for Nebula Nine
-bass1 = sound "moogan" # amp 0.9 # sustain 0.3 # release bassR # waveform 3 # unison 6 # detune1 0.01 # scatter1 0.2 # lfo (bassLFO * 0.5) # rate 0.8 # resonance 0.05
-bass2 = sound "moogan" # amp 0.34 # sustain 0.3 # release bassR # waveform 3 # unison 3 # detune1 0.01 # lfo bassLFO # rate 0.8 # resonance 0.05 # phase 0.4 # octave 4
+bassLFO = 1
+bassRelease = 0.19 -- 0.21 for Event Horizon, 0.25 for Nebula Nine
+bass1 = sound "moogan" # amp 0.9 # sustain 0.3 # release bassRelease # waveform 3 # unison 6 # detune1 0.01 # scatter1 0.2 # lfo (bassLFO * 0.5) # rate 0.8 # resonance 0.05
+bass2 = sound "moogan" # amp 0.35 # sustain 0.3 # release bassRelease # waveform 3 # unison 3 # detune1 0.01 # lfo bassLFO # rate 0.8 # resonance 0.05 # phase 0.4 # octave 4
 bass = stack [bass1, bass2] # room 0.25 # size 0.85
 
 -- EVENT HORIZON MID
@@ -54,9 +54,9 @@ eventHorizonMid2 = sound "moogan" # amp 0.4 # waveform 1 # unison 2 # detune1 0.
 eventHorizonMid = stack [eventHorizonMid1, eventHorizonMid2] # room 0.25 # size 0.9
 
 -- EVENT HORIZON LEAD
-eventHorizonLead1 = sound "moogan" # amp 0.3 # waveform 1 # unison 2 # detune1 0.004 # scatter1 0.6 # lfo 15 # rate 0 # resonance 0.3 # phase 0.1
-eventHorizonLead2 = sound "moogan" # amp 1.1 # waveform 3 # unison 6 # detune1 0.008 # detune2 (-0.006) # scatter2 0.6 # lfo 15.0 # rate 0 # resonance 0.3 # instability 0.08 # octave 4
-eventHorizonLead = stack [eventHorizonLead1, eventHorizonLead2] # sustain 1.3 # release 1.3 # phasr 2 # phasdp 0.4 # room 0.25 # size 0.9
+eventHorizonLead1 = sound "moogan" # amp 0.25 # waveform 1 # unison 2 # detune1 0.003 # scatter1 0.65 # lfo 20.0 # rate 0.0 # resonance 0.3 # phase 0.1
+eventHorizonLead2 = sound "moogan" # amp 1.3 # waveform 3 # unison 6 # detune1 0.009 # detune2 (-0.006) # scatter2 0.65 # lfo 20.0 # rate 0.0 # resonance 0.3 # instability 0.2 # octave 4
+eventHorizonLead = stack [eventHorizonLead1, eventHorizonLead2] # sustain 1.3 # release 1.3 # phasr 3 # phasdp 0.6 # room 0.25 # size 0.9
 
 -- EVENT HORIZON BRASS
 eventHorizonBrass = sound "moogan"
@@ -82,8 +82,8 @@ experimentalLead = stack [experimentalLead1, experimentalLead2, experimentalLead
 setbpm(75)
 createSidechain 8 0 0.7 0.001 0.1
 d1 $ note "c*4" # kick
-d2 $ note "~ c ~ c" # snare
-d3 $ note "c*8" # hihat
+d2 $ note "~ c ~ c" # snare # gain 1.05
+d6 $ note "c*16" # hihat
 d4 $ slow 2 (note "c") # cymbal
 d5 $ slowcat [note "~", note "~ ~ ~ [c ~ ~ ~]"] # toms1
 d6 $ slowcat [note "~", note "~ ~ ~ [~ c ~ ~]"] # toms2

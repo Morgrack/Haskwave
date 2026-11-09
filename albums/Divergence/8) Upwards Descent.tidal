@@ -1,0 +1,56 @@
+-- SETUP
+do
+    setbpm(200)
+    createSidechain 4 0 0.97 0.001 0.01
+    
+-- SECTION A
+do
+    d1 $ note "c c [c c] c" # kick
+    d2 $ note "~ c ~ c" # snare5
+    d5 $ note "d3*8" # bass
+
+-- SECTION B
+do
+    d3 $ note "c*16" # hihat
+    d5 $ slowcat
+        [
+            note "d3*8", note "ds3*8", note "e3*8", note "f3*8", note "fs3*8", note "g3*8", note "gs3*8", note "a3*8",
+            note "d3*8", note "ds3*8", note "e3*8", note "f3*8", note "fs3*8", note "g3*8", note "gs3*8", note "b3*8"
+        ] # bass # gain 0.98
+
+-- SECTION C
+do
+    d1 $ note "c ~ c ~" # kick
+    d2 $ note "~ ~ c ~" # snare5
+    d3 silence
+    d4 $ note "c*2" # cymbal # gain 0.9
+    d5 $ slowcat [note "d3*4", note "d3*4", note "f3*4", note "cs3*4"] # bass # release 0.37
+
+-- SECTION A
+do
+    d1 $ note "c c [c c] c" # kick
+    d2 $ note "~ c ~ c" # snare5
+    d4 silence
+    d5 $ note "d3*8" # bass
+
+-- SECTION B
+do
+    d3 $ note "c*16" # hihat
+    d5 $ slowcat
+        [
+            note "d3*8", note "ds3*8", note "e3*8", note "f3*8", note "fs3*8", note "g3*8", note "gs3*8", note "a3*8",
+            note "d3*8", note "ds3*8", note "e3*8", note "f3*8", note "fs3*8", note "g3*8", note "gs3*8", note "b3*8"
+        ] # bass # gain 0.98
+
+-- SECTION C
+do
+    d1 $ note "c ~ c ~" # kick
+    d2 $ note "~ ~ c ~" # snare5
+    d3 silence
+    d4 $ note "c*2" # cymbal # gain 0.9
+    d5 $ slowcat [note "d3*4", note "d3*4", note "f3*4", note "cs3*4"] # bass # release 0.37
+
+-- BRIDGE
+do
+    
+hush

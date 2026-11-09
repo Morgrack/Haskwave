@@ -1,0 +1,29 @@
+-- SETUP
+do
+    createSidechain 4 0 0.85 0.005 0.04
+    setbpm(120)
+
+-- VERSE
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare2
+    d3 $ note "c*12" # hihat
+    d5 $ slowcat [note "d3*12", note "e3*12", note "f3*12", note "c3*12", note "d3*12", note "e3*12", note "f3*12", note "g3*12"] # bass
+    
+-- CHORUS
+do
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare2
+    d3 $ note "c*12" # hihat
+    d5 $ slowcat [note "a3*12", note "g3*12", note "f3*12", note "e3*12", note "a3*12", note "g3*12", note "f3*12", note "c3*12"] # bass
+
+hush
+panic
+
+quickSynth = sound "moogan" # amp 0.6 # waveform 3 # unison 3 # detune1 0.016 # scatter1 0.7 # lfo 4.5 # resonance 0.15 # rate 0 # room 0.5 # size 0.8 # instability 0.05 # shape 0.2
+
+d6 $ slowcat 
+    [
+        note "d5 [~ [a4 d5 a4]]" # legato "1.5 0.8 0.8 0.8", note "e5 [g5 f5 e5]", note "f5 e5 d5 [c5 d5 c5]" # legato "1 1 1 0.8", note "f5 e5",
+        note "d5 [~ [a4 d5 a4]]" # legato "1.5 0.8 0.8 0.8", note "e5 [g5 f5 e5]", note "f5 g5 a5 [g5 a5 g5]" # legato "1 1 1 0.8", note "bf5 a5"
+    ] # quickSynth

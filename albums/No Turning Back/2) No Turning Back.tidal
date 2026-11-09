@@ -1,5 +1,12 @@
 setcps(85 / 60 / 4)
-d1 $ slowcat [note "c4*16", note "[df4*8] [ef4*4 df4*4]", note "c4*16", note "[bf3*8] [af3*4 bf3*4]"] # sound "superpiano" # room 0.3 # size 0.9 -- bass plus Solar Movement style mid synth, brass and singing
+d1 $ slowcat [note "c*4", note "c c c [c c]"] # kick
+d2 $ note "~ c ~ c" # snare
+d3 $ note "c*16" # hihat
+d4 $ slowcat [note "~", note "~", note "~", note "~ ~ ~ [~ ~ g c]" # pan "~ ~ ~ [~ ~ 0.35 0.65]"] # toms # speed (2 ** (1 / 12))
+d5 $ slowcat [note "c3*16", note "[df3*8] [ef3*4 df3*4]", note "c3*16", note "[bf2*8] [af2*4 bf2*4]"] # bass -- low lfo bass plus Solar Movement style mid synth, brass, monoish pad and singing
+d6 $ slowcat [note "c [~ c] af g", note "c [~ c] af g", note "c [~ c] af g", note "f [~ f] ef df"] # quickSynth -- ligher, less spread brass
 
 setcps(85 / 60 / 10)
-d1 $ note "c ~ ~ [~ c f g] af [~ ~ g f] ef [~ g] d [~ g]" # legato 2 # sound "superpiano" # room 0.3 # size 0.9 -- brass transition in, like A New World, cymbal hits
+d3 $ note "c ~ ~ [~ c f g] af [~ ~ g f] ef [~ g] d [~ g]" # legato 2 # sound "superpiano" # room 0.3 # size 0.9 -- main brass transition in, like A New World, cymbal hits, choral
+d4 $ note "c3*4 c3*4 c3*4 c3*4 af3*4 af3*4 ef3*4 ef3*4 d3*4 d3*4" # bass
+hush

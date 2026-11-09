@@ -2,6 +2,19 @@ setbpm(70)
 
 d1 $ slowcat [note "c5 [~ a4] c5 d5", note "b4 [~ g4] b4 c5", note "a4 [~ f4] a4 b4", note "g4", note "c5 [~ [a4 b4]] c5 d5", note "b4 [~ [g4 a4]] b4 c5", note "a4 [~ [f4 g4]] a4 b4", note "g4"] # sound "superpiano" # room 0.3 # size 0.9
 
-d1 $ slowcat [note "[e5 c5] [e5 c5] [e5 c5] fs5", note "[e5 c5] [e5 c5] [e5 c5] fs5", note "[e5 b4] [e5 b4] [e5 b4] fs5", note "[e5 b4] [e5 b4] [e5 b4] fs5"] # sound "superpiano" # room 0.3 # size 0.9
+d1 $ slowcat [note "[e5 c5] [e5 c5] [e5 c5] fs5", note "[e5 c5] [e5 c5] [e5 c5] fs5", note "[e5 b4] [e5 b4] [e5 b4] fs5", note "[e5 b4] [e5 b4] [e5 b4] fs5"] # quickSynth
+
+quickSynth = sound "moogan" # amp 0.5 # attack 0.1 # release 1.2 # sustain 1.2 # waveform 3 # unison 3 # detune1 0.02 # lfo 0.5 # rate 0 # scatter1 0.85 # room 0.3 # size 0.9
+
+d2 $ note "e3*16" # bass
 
 hush
+
+-- a b structure, initially just bass and simple upper melodic instrument, no snare
+-- THEN
+-- bass
+-- main synth
+-- panned growly synth in right ear, think Sky High from Deep Fantasy 
+-- panned classic detuned saw in left ear
+-- singing
+-- minimal sidechaining on drums

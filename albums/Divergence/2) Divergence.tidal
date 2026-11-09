@@ -1,0 +1,47 @@
+-- SETUP
+do
+    setbpm(87)
+    createSidechain 9 0 0.97 0.001 0.01
+    createSidechain 11 0 0.62 0.001 0.02
+    
+-- SECTION A
+do
+    let phrase1 = note "g5 ~ f5 ~ af5 ~ f5 af5 g5 g5 af5 f5 af5 g5 f5 ~"
+    let phrase2 = note "g5 ~ f5 ~ af5 ~ f5 af5 g5 g5 af5 f5 bf5 f5 g5 ~"
+    d1 $ note "c ~ c ~ c c c c c c c c c c c ~" # kick
+    d2 $ note "~ ~ ~ ~ c ~ ~ ~ ~ ~ ~ ~ ~ ~ c ~" # snare4
+    -- d3-d6 toms, d7 hihat
+    d8 $ slowcat [phrase1, phrase2, phrase1, phrase2, phrase1, phrase2, phrase1, phrase1] # chorus (0.12, 0.5, 0.9, 0.005) (anvil)
+    d9 $ slowcat [note "~", note "~", note "~", note "~", phrase1, phrase2, phrase1, phrase1] # chorus (0.12, 0.5, 0.9, 0.005) (anvil # octave 6 # gain 0.98) 
+    -- d10 $ slowcat [note "[[g3 ~ f3 ~] g3] ~" # legato "0.75 2.75 1 1"] # divergenceBass
+    -- d10-d11 anvil
+
+-- BRIDGE
+do
+
+-- SECTION B
+do
+    let phrase1 = map (# pan "[0.2 0.8]*2") [note "ef5 c5 d5 c5", note "c5 d5 c5 ef5", note "ef5 f5 ef5 d5", note "ef5 d5 c5 b4"]
+    let phrase2 = map (# pan "[0.2 0.8]*4") [note "[ef5 c5 d5 c5]*2", note "[c5 d5 c5 ef5]*2", note "[ef5 f5 ef5 d5]*2", note "ef5 f5 ef5 d5 ef5 d5 c5 b4"] 
+    d1 $ note "c*4" # kick
+    d2 $ note "~ c ~ c" # snare4
+    d3 $ slowcat (phrase1 ++ phrase2) # anvil
+    d12 $ slowcat [note "[c3*4]*2 [d3*4]*2", note "[ef3*4]*2 [[f3*4] [g3*4]]", note "[af3*4]*2 [g3*4]*2", note "[f3*4]*2 [[ef3*4] [b2*4]]"] # bass
+
+-- SECTION C
+do
+    d1 $ slowcat [note "[c*4] [c*4] ~ c", note "[c*4] [c*4] ~ c", note "[c*4] [c*4] c c", note "[c*4] c [c*4] c"] # kick
+    d2 $ slowcat [note "~ ~ ~ c", note "~ ~ ~ c", note "~ ~ ~ c", note "~ c ~ c"] # snare4
+    d7 $ slowcat [note "~ c*8", note "~ c*8", note "~ c*8", note "~ c*4 ~ c*4"] # hihat
+    --d10 $ slowcat [note "c3 ~", note "c3 ~", note "c3 ~", note "c3 ~ c3 ~"] # divergenceBass
+    d12 $ slowcat [note "~ ~ [ef3*4] [ef3*4]", note "~ ~ [d3*4] [d3*4]", note "~ ~ [ef3*4] [ef3*4]", note "~ [ef3*4] ~ [cs3*4]"] # bass
+
+-- SECTION D
+do
+
+-- SECTION E
+
+-- BRIDGE
+do
+
+hush

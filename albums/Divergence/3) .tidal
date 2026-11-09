@@ -1,0 +1,44 @@
+-- SETUP
+do
+    createSidechain 3 0 0.55 0.001 0.06
+    
+-- INTRO
+
+
+-- CHORUS
+do
+    setcps(135 / 60 / 7)
+    d1 $ note "c*7" # kick
+    d2 $ slowcat ["~ c ~ c ~ c ~", "c ~ c ~ c ~ c"] # snare1 -- this needs white noise, listen to Bahamut for inspiration
+    d3 $ note "[c*2] [c*2] [c*2] [c*2] [c [c c c c c c c ~]] [c [c c c c c c c ~]] [c [c c c c c c c ~]]" # hihat # cut 1
+    d4 $ note "f3 f3 f3 f3 gf3 f3 ef3" # threeBass # legato 1.02 # gain 0.96
+    -- add Golgoth style howl, alien lead and screaming, sampled political crowd screams and marching bands on every other kick
+    
+-- VERSE
+do
+    -- drums
+    -- singing
+    -- filtered threebass
+
+-- CHORUS
+do
+    
+-- VERSE
+do
+    
+-- CHORUS
+do
+    
+-- BRIDGE
+do
+    d4 $ note "f3 f3 f3 f3 gf3 f3 e3" # "superpiano" --change harmony in the chorus to work with melody, clean up legato on synth, tom runs in between phrases for emphasis
+    quickSynth = sound "moogan" # release 0.75 # sustain 1.0 # waveform 3 # unison 3 # detune1 0.01 # scatter1 0.8 # rate 0 # room 0.2 # size 0.9
+    d5 $ slowcat [note "f5 [~ g5] af5 [~ g5] [af5 g5] f5 e5", note "[~ f5] g5 [~ f5] [g5 af5] g5 ~ ~"] # quickSynth
+    d5 $ slowcat [note "c6 [~ bf5] df6 [~ bf5] [df6 c6] bf5 af5", note "[~ bf5] c6 [~ bf5] [c6 df6] c6 ~ ~"] # quickSynth
+    d5 $ slowcat [note "f5 [~ g5] af5 [~ g5] [af5 g5] f5 e5", note "[~ f5] df5 [~ bf4] [df5 bf4] c5 ~ ~"] # quickSynth
+    
+-- CHORUS
+do
+    d5 $ note "f3 f3 f3 f3 gf3 f3 ef3" # "superpiano"
+    
+hush

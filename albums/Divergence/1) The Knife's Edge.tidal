@@ -1,0 +1,33 @@
+-- SETUP
+do
+    setbpm(80)
+    createSidechain 4 0 0.6 0.001 0.03
+
+-- INTRO
+do
+    resetCycles
+    let filterSweep = djf $ range 0 0.5 $ (slow 8 saw)
+    d1 $ slowcat ((replicate 7 ("c4*4")) ++ ["c4 c4 c4 ~"]) # kick
+    d2 $ slowcat ((replicate 7 ("[~ c]*4")) ++ ["[~ c] [~ c] [~ c] ~"]) # hihat -- replace this with knife grating noise
+    d5 $ slowcat [note "[g3*4]*2 [gs3*4]*2", note "[a3*4]*2 [bf3*4]*2", note "[fs3*4]*2 [g3*4]*2", note "[a3*4]*2 [bf3*4]*2"] # bass # filterSweep
+
+-- SECTION A
+do
+    d5 $ slowcat [note "[g3*4]*2 [gs3*4]*2", note "[a3*4]*2 [bf3*4]*2", note "[fs3*4]*2 [g3*4]*2", note "[a3*4]*2 [bf3*4]*2"] # bass
+
+-- SECTION B
+do
+
+-- SECTION C
+do
+
+-- SECTION D
+do
+
+-- SECTION E
+do
+
+-- OUTRO
+do
+
+hush

@@ -1,0 +1,62 @@
+-- SETUP
+do
+    setbpm(130)
+    createSidechain 9 0 0.87 0.001 0.035
+    
+-- INTRO
+do
+    d1 $ slowcat 
+        [
+            note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "c*4",
+            note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "c c c [c c]"
+        ] # kick
+    d2 $ slowcat
+        [
+            note "~ [~ c] ~ c", note "~ [~ c] ~ c" , note "~ [~ c] ~ c", note "~",
+            note "~ [~ c] ~ c", note "~ [~ c] ~ c" , note "~ [~ c] ~ c", note "~ ~ ~ [c ~]"
+        ] # snare4 # cut 1
+
+-- VERSE
+do
+    d1 $ slowcat [note "[c c] c [~ c] c", note "c c [~ c] c", note "c c [~ c] c", note "c c [~ c] [c c]"] # kick
+    d2 $ note "~ c ~ c" # snare4
+    d3 $ slowcat ((replicate 8 (note "~")) ++ (replicate 8 (note "c*8"))) # hihat
+    d4 $ slow 16 (note "c c") # cymbal
+    d10 $ slowcat
+        [
+            note "e3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
+            note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
+            note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 f3 f3 f3 f3 f3 f3 f3",
+            note "f3 e3 e3 e3 e3 e3 e3 e3", note "e3*8", note "e3 g3 g3 g3 g3 g3 g3 g3", note "g3 gs3 gs3 gs3 fs3 fs3 fs3 fs3"
+        ] # bass
+
+-- CHORUS
+do
+    d1 $ slowcat 
+        [
+            note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c c]]", note "[[c [c c]] [c c] [c c] [c [c c]]]",
+            note "c*8", note "c*8", note "c*8", note "c*8"
+        ] # kick
+    d2 $ slowcat
+        [
+            note "~ [~ c] ~ c", note "~ [~ c] ~ c" , note "~ [~ c] ~ c", note "~ [~ c] ~ c",
+            note "~ c ~ c", note "~ c ~ c" , note "~ c ~ c", note "~ c ~ ~ c ~ c c" 
+        ] # snare4 # cut 1
+    d3 silence
+    d4 $ slow 8 (note "c c") # cymbal
+    d10 silence
+    
+-- VERSE
+do
+    
+-- CHORUS
+do
+    
+-- BRIDGE
+do
+    
+-- CHORUS
+do
+    
+hush
+panic

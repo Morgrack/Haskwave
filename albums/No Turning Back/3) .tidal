@@ -6,5 +6,5 @@ d2 $ slowcat [note "fs3*16", note "f3*16", note "gs3*16", note "gs3*8 g3*8"] # s
 d1 $ slowcat [note "fs5", note "~", note "f5", note "~", note "a5", note "~"] # sound "superpiano" # room 0.3 # size 0.9 -- like eventHorizonMid but higher octave, also have a growling swapping between ears on arpeggio downwards on the beat
 d2 $ slowcat [note "as5", note "~", note "a5", note "~", note "cs6", note "~"] # sound "superpiano" # room 0.3 # size 0.9
 d3 $ slowcat [note "fs3*16", note "fs3*16", note "f3*16", note "f3*16", note "a3*16", note "a3*16"] # sound "superpiano" # amp 0.2 # room 0.3 # size 0.9
-
+hush
 -- like Dreams in the Dusk, eventually turns major and singing comes in
